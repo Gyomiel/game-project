@@ -15,6 +15,8 @@ body {
     background-color: black;
     position: relative;
     display: none;
+    transition: opacity 10s ease-in-out;
+
 }
 
 #character {
@@ -67,7 +69,8 @@ button:hover {
 transition: padding 0.3s ease-in-out;
 background-color: #4e171f;
 cursor: pointer;
+}
 
-
-
+audio {
+    display: none;
 }

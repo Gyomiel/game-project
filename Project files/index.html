@@ -7,17 +7,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="startscreen.js" defer></script>
+   <script src="startscreen.js" defer></script>
     <script src="character.js" defer></script>
     <script src="main.js" defer></script>
     <title>The Hero of Rhyme</title>
   </head>
   <body>
-    <div id="startScreen"></div>
-    <audio controls>
-      <source src="horse.ogg" type="audio/ogg">
-      <source src="horse.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+    <div id="startScreen">
+    </div>
+    <audio id="bgOST" controls><source src="../audio/midnight-forest-184304.mp3" type="audio/mpeg"></audio>
+    <audio id="heyListen" controls>
+      <source src="../audio/hey_listen.mp3" type="audio/mpeg">
     </audio> 
     <button class="btn" type="submit" onclick="">START!</button>
     <div id="screen"></div>
