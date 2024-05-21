@@ -13,7 +13,7 @@ function startGame() {
     character.insertCharacter();
     
     timerMoveCharacter = setInterval(() => 
-        character.characterMovement() , 100)
+        character.characterMovementX() , 100)
 
 }
 
