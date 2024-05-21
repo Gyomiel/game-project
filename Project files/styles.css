@@ -1,3 +1,7 @@
+html {
+    font-family: 'Press Start 2P', sans-serif;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -10,9 +14,60 @@ body {
     height: 1000px;
     background-color: black;
     position: relative;
+    display: none;
 }
 
 #character {
     background-color: green;
     position: absolute;
+}
+
+#startScreen {
+    background-image: url(../images/Screenshot\ from\ 2024-05-21\ 10-11-12.png);
+    width: 1000px;
+    height: 1000px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    position: relative;
+
+}
+button {
+    background-color: #ff5c2b;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    margin-top: 605px;
+    border-radius: 40px;
+    font-family: 'Press Start 2P', sans-serif;
+    animation: pulse 1s infinite;
+}
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+button:hover {
+transition: padding 0.3s ease-in-out;
+background-color: #4e171f;
+cursor: pointer;
+
+
+
 }
