@@ -9,8 +9,20 @@ class Character { // Creates the character.
         this.sprite = document.createElement("div");
         this.directionX = null;
         this.directionY = null;
-        this.speed = 10;
+        this.speed = 10;}
+       /* this.health = health;
+        this.strenght = strenght;
     }
+    characterAttack() {
+        return this.strenght
+    }
+
+    receiveDamage(dmg) {
+        this.health -= dmg
+        if(this.health > 0) {
+
+        }
+    }*/
 
     insertCharacter() { // Inserts the character into the canvas.
         this.sprite.setAttribute("id", "character");
