@@ -23,7 +23,7 @@ class Character { // Creates the character.
 
     characterMovementX() { // Moves the character in its X axis (left and right).
 
-        var moveX = this.x + this.speed * this.directionX;
+        let moveX = this.x + this.speed * this.directionX;
       
         if (moveX <= 1000 - this.width && moveX >= 0) {
             this.x = moveX;
@@ -33,7 +33,7 @@ class Character { // Creates the character.
 
     characterMovementY() { // Moves the character in its Y axis (up and down).
 
-        var moveY = this.y + this.speed * this.directionY;
+        let moveY = this.y + this.speed * this.directionY;
       
         if (moveY <= 1000 - this.height && moveY >= 0) {
             this.y = moveY;
