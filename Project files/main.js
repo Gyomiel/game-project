@@ -9,9 +9,10 @@ let heyListen = document.getElementById("heyListen"); // "Hey, listen!" sound ef
 let stOST = document.getElementById("stOST"); // "The Hero of Rhyme" soundtrack for the title screen.
 let timerMoveCharacterX; // Moving time interval on X axis.
 let timerMoveCharacterY; // Moving time interval on Y axis.
-let timerCreateEnemy
+let timerCreateEnemy;
 
-//creamos array de enemigos
+// Enemies array
+
 let enemyArray = [];
 
 function createEnemy() {

@@ -25,12 +25,11 @@ class Enemy { // Creates the enemy.
 
     }
 
-    randomNumber() {
+    randomNumber() { // Generates a random direction for the enemies.
         this.directionRandom = Math.floor(Math.random() * 4) + 1;
     }
 
     enemyMovement() { // Moves the character in its X axis (left and right).
-
 
         console.log(this.directionRandom)
 
@@ -72,7 +71,6 @@ class Enemy { // Creates the enemy.
                 canvas.removeChild(this.sprite);
                 clearInterval(timerMoveEnemyX)
                 clearInterval(timerMoveEnemyY)
-
 
             }
 
