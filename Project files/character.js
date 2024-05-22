@@ -23,30 +23,21 @@ class Character { // Creates the character.
 
     characterMovementX() { // Moves the character in its X axis (left and right).
 
-        this.directionX = 1;
         var moveX = this.x + this.speed * this.directionX;
       
-        if (moveX <= 1000 - this.width && moveX >= 0 && this.directionX === 1) {
-            this.directionX= -1;
+        if (moveX <= 1000 - this.width && moveX >= 0) {
             this.x = moveX;
             this.sprite.style.left = this.x + "px";
-
         }
-
     }
-
 
     characterMovementY() { // Moves the character in its Y axis (up and down).
 
-        this.directionY = 1;
         var moveY = this.y + this.speed * this.directionY;
       
-        if (moveY <= 1000 - this.height && moveY >= 0 && this.directionY === 1) {
-            this.directionY= -1;
+        if (moveY <= 1000 - this.height && moveY >= 0) {
             this.y = moveY;
-            this.sprite.style.left = this.y + "px";
-
+            this.sprite.style.top = this.y + "px";
         }
-
     }
 }

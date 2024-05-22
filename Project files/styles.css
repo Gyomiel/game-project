@@ -24,6 +24,11 @@ body {
     position: absolute;
 }
 
+#enemy {
+  background-color: red;
+  position: absolute;
+}
+
 #startScreen {
     background-image: url(../images/Screenshot\ from\ 2024-05-21\ 10-11-12.png);
     width: 1000px;
