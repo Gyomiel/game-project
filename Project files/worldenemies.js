@@ -4,8 +4,8 @@ class Enemy { // Creates the enemy.
     constructor(randomLocationX, randomLocationY) { // Random location.
         this.x = randomLocationX;
         this.y = randomLocationY;
-        this.width = 40;
-        this.height = 40;
+        this.width = 75;
+        this.height = 75;
         this.sprite = document.createElement("div");
         this.speed = 1;
         this.timerMove = setInterval(() => this.enemyMovement(), 10)

@@ -12,21 +12,28 @@ body {
 #screen {
     width: 1000px;
     height: 1000px;
-    background-color: black;
+    background-image: url(../sprites/Map.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
     display: none;
     transition: opacity 10s ease-in-out;
 
 }
 
+
 #character {
-  
-    background-color: green;
+    background-image: url(../sprites/Link\ standing.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
     position: absolute;
 }
 
 #enemy {
-  background-color: red;
+  background-image: url(../sprites/meowth-pokemon.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
   position: absolute;
 }
 
@@ -39,8 +46,14 @@ body {
     background-size: cover;
     background-position-x: center;
     position: relative;
-
 }
+
+#obs {
+  position: absolute;
+} 
+
+
+
 button {
     background-color: #ff5c2b;
     color: white;

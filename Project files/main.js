@@ -11,6 +11,14 @@ let timerMoveCharacterX; // Moving time interval on X axis.
 let timerMoveCharacterY; // Moving time interval on Y axis.
 let timerCreateEnemy;
 
+// Create obstacles
+
+let obstaclesCentralTrees = new Obstacles(82, 350, 333, 140);
+let 
+obstaclesCentralTrees.sprite.style.backgroundColor = "#FF0000";
+console.log()
+
+
 // Enemies array
 
 let enemyArray = [];
@@ -53,6 +61,8 @@ function startGame() { // Starts the game.
 
     timerCreateEnemy = setInterval(() =>
         createEnemy(), 1000)
+
+    obstaclesCentralTrees.insertObstacles();
 
 
 }
@@ -134,6 +144,7 @@ window.addEventListener("keyup", function (e) {
 function updateCharacterPosition() {
 
     let enemySize = 40;
+    let obstacleSize = 220
     
     let distanceBetweenEnCX = character.x - enemyArray[0].x;
     let distanceBetweenEnCY = character.y - enemyArray[0].y;
@@ -143,6 +154,10 @@ function updateCharacterPosition() {
 
     let distanceBetweenEnCX2 = character.x - enemyArray[2].x;
     let distanceBetweenEnCY2 = character.y - enemyArray[2].y;
+ 
+    let distanceBetweenObstaclesX = character.x - obstacles.x;
+    let distanceBetweenObstaclesY = character.y - obstacles.y;
+ 
 
     console.log(enemyArray[0].x)
     
@@ -184,7 +199,7 @@ function updateCharacterPosition() {
         
     }
 
-    if (Math.abs(distanceBetweenEnCX2) <= enemySize && Math.abs(distanceBetweenEnCY2) <= enemySize) {
+    if (Math.abs(distanceBetweenEnCX2) <= enemySize && Math.abs(distanceBetweenEnCY2) <= obstacleSize) {
         if (distanceBetweenEnCX2 <= 0) {
             character.directionX = 0;
         }
@@ -201,6 +216,24 @@ function updateCharacterPosition() {
             character.directionY = 0;
         }
         
+    }
+
+    if (Math.abs(distanceBetweenObstaclesX) <= enemySize && Math.abs(distanceBetweenObstaclesY) <= obstacleSize) {
+        if (distanceBetweenObstaclesX <= 0) {
+            character.directionX = 0;
+        }
+
+        if (distanceBetweenObstaclesX >= 0) {
+            character.directionX = 0;
+        }
+
+        if (distanceBetweenObstaclesY <= 0) {
+            character.directionY = 0;
+        }
+
+        if (distanceBetweenObstaclesY >= 0) {
+            character.directionY = 0;
+        }
     }
 }
 

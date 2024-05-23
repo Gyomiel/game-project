@@ -4,8 +4,8 @@ class Character { // Creates the character.
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 40;
-        this.height = 40;
+        this.width = 80;
+        this.height = 80;
         this.sprite = document.createElement("div");
         this.directionX = null;
         this.directionY = null;
