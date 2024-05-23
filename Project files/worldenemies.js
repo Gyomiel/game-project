@@ -97,7 +97,7 @@ class Enemy { // Creates the enemy.
                 let charVertexBRY = character.y + character.height;
 
 
-                if (eVertexBLX >= charVertexTLX && eVertexBLX <= charVertexTRX && eVertexTRY >= charVertexTLY && eVertexTRY <= eVertexBLY || eVertexBRX >= charVertexTLX && eVertexBRX <= charVertexTRX && eVertexBLY >= charVertexTRY && eVertexBRY <= charVertexBRY) {
+                if (eVertexBLX >= charVertexTLX && eVertexBLX <= charVertexTRX && eVertexTRY >= charVertexTLY && eVertexTRY <= charVertexBLY || eVertexTRX >= charVertexTLX && eVertexTRX <= charVertexTRX && eVertexBLY >= charVertexTRY && eVertexBRY <= charVertexBRY) {
                     this.removeEnemy();
                     console.log("Auch")
                 }
