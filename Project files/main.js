@@ -11,33 +11,24 @@ let timerMoveCharacterX; // Moving time interval on X axis.
 let timerMoveCharacterY; // Moving time interval on Y axis.
 let timerCreateEnemy;
 
+
 // Create obstacles
 
 let obstaclesCentralTrees = new Obstacles(82, 365, 333, 135);
-obstaclesCentralTrees.sprite.style.backgroundColor = "#FF0000";
-let obstaclesFirstTrunk = new Obstacles(275, 30, 60, 225);
-obstaclesFirstTrunk.sprite.style.backgroundColor = "#FF0000";
-let obstaclesSecondTrunk = new Obstacles(275, 30, 60, 440);
-obstaclesSecondTrunk.sprite.style.backgroundColor = "#FF0000";
-let obstaclesThirdTrunk = new Obstacles(275, 30, 392, 225);
-obstaclesThirdTrunk.sprite.style.backgroundColor = "#FF0000";
 
+let obstaclesFirstTrunk = new Obstacles(275, 30, 60, 225);
+
+let obstaclesSecondTrunk = new Obstacles(275, 30, 60, 440);
+
+let obstaclesThirdTrunk = new Obstacles(275, 30, 392, 225);
 
 let obstaclesFirstTreeRow = new Obstacles(420, 85, 0, 0);
-obstaclesFirstTreeRow.sprite.style.backgroundColor = "#FF0000";
 
 let obstaclesSecondTreeRow = new Obstacles(420, 85, 580, 0);
-obstaclesSecondTreeRow.sprite.style.backgroundColor = "#FF0000";
 
 let obstaclesFirstTreeColumn = new Obstacles(80, 1000, 0, 0);
-obstaclesFirstTreeColumn.sprite.style.backgroundColor = "#FF0000";
 
 let obstaclesSecondTreeColumn = new Obstacles(80, 1000, 920, 0);
-obstaclesSecondTreeColumn.sprite.style.backgroundColor = "#FF0000";
-
-
-
-
 
 
 
@@ -58,8 +49,8 @@ function createEnemy() {
     enemyArray.push(enemy); }
 }
 
-// Character
 
+// Character
 
 let widthInt = canvas.style.width.slice(0, 4);
 let heightInt = canvas.style.width.slice(0, 4);
@@ -68,12 +59,9 @@ let character = new Character(475, 500); // Sets the character into the canvas.
 
 // Starting the game
 
-
 function startGame() { // Starts the game.
     character.insertCharacter(); // Inserts the character into the game.
     
-
-
     timerMoveCharacterX = setInterval(() =>
         character.characterMovementX(), 20);
 
@@ -92,7 +80,6 @@ function startGame() { // Starts the game.
     obstaclesSecondTreeRow.insertObstacles();
     obstaclesFirstTreeColumn.insertObstacles();
     obstaclesSecondTreeColumn.insertObstacles();
-
 
 }
 
@@ -132,10 +119,12 @@ window.addEventListener("keydown", function (e) {
     switch (e.key) {
         case "a":
            character.directionX = -1;
+           character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
             updateCharacterPosition(); 
             break;
         case "d":
             character.directionX = 1;
+            character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
             updateCharacterPosition();
             break;
         case "w":
@@ -146,9 +135,8 @@ window.addEventListener("keydown", function (e) {
             character.directionY = 1;
             updateCharacterPosition();
             break;
-        case " ":
+        case "g":
             character.attacking = true;
-            character.sprite.style.backgroundImage = "url('../sprites/Link-attacking.gif')"
             break;
     }
 })
@@ -163,9 +151,8 @@ window.addEventListener("keyup", function (e) {
         case "s":
             character.directionY = 0;
             break;
-        case " ":
+        case "g":
             character.attacking = false;
-            character.sprite.style.backgroundImage = "url('../sprites/Link-standing.gif')"
             break;
     }
 })
