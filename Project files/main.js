@@ -14,7 +14,6 @@ let timerCreateEnemy;
 // Create obstacles
 
 let obstaclesCentralTrees = new Obstacles(82, 350, 333, 140);
-let 
 obstaclesCentralTrees.sprite.style.backgroundColor = "#FF0000";
 console.log()
 
@@ -100,6 +99,7 @@ let enemySize = 40;
 let distanceBetweenEnCY = character.y - enemy.y;
  */
 window.addEventListener("keydown", function (e) {
+
     switch (e.key) {
         case "a":
            character.directionX = -1;
@@ -124,6 +124,7 @@ window.addEventListener("keydown", function (e) {
 })
 
 window.addEventListener("keyup", function (e) {
+    
     switch (e.key) {
         case "a":
         case "d":
@@ -144,7 +145,9 @@ window.addEventListener("keyup", function (e) {
 function updateCharacterPosition() {
 
     let enemySize = 40;
-    let obstacleSize = 220
+    let obstacleSize = 220;
+
+    let contador = 0;
     
     let distanceBetweenEnCX = character.x - enemyArray[0].x;
     let distanceBetweenEnCY = character.y - enemyArray[0].y;
