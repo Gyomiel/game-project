@@ -138,8 +138,15 @@ function updateCharacterPosition() {
     let distanceBetweenEnCX = character.x - enemyArray[0].x;
     let distanceBetweenEnCY = character.y - enemyArray[0].y;
 
+    let distanceBetweenEnCX1 = character.x - enemyArray[1].x;
+    let distanceBetweenEnCY1 = character.y - enemyArray[1].y;
+
+    let distanceBetweenEnCX2 = character.x - enemyArray[2].x;
+    let distanceBetweenEnCY2 = character.y - enemyArray[2].y;
+
     console.log(enemyArray[0].x)
-    if (distanceBetweenEnCX <= enemySize && distanceBetweenEnCY <= enemySize) {
+    
+    if (Math.abs(distanceBetweenEnCX) <= enemySize && Math.abs(distanceBetweenEnCY) <= enemySize) {
         if (distanceBetweenEnCX <= 0) {
             character.directionX = 0;
         }
@@ -157,4 +164,65 @@ function updateCharacterPosition() {
         }
         
     }
+
+    if (Math.abs(distanceBetweenEnCX1) <= enemySize && Math.abs(distanceBetweenEnCY1) <= enemySize) {
+        if (distanceBetweenEnCX1 <= 0) {
+            character.directionX = 0;
+        }
+
+        if (distanceBetweenEnCX1 >= 0) {
+            character.directionX = 0;
+        }
+
+        if (distanceBetweenEnCY1 <= 0) {
+            character.directionY = 0;
+        }
+
+        if (distanceBetweenEnCY1 >= 0) {
+            character.directionY = 0;
+        }
+        
+    }
+
+    if (Math.abs(distanceBetweenEnCX2) <= enemySize && Math.abs(distanceBetweenEnCY2) <= enemySize) {
+        if (distanceBetweenEnCX2 <= 0) {
+            character.directionX = 0;
+        }
+
+        if (distanceBetweenEnCX2 >= 0) {
+            character.directionX = 0;
+        }
+
+        if (distanceBetweenEnCY2 <= 0) {
+            character.directionY = 0;
+        }
+
+        if (distanceBetweenEnCY2 >= 0) {
+            character.directionY = 0;
+        }
+        
+    }
 }
+
+/* console.log
+let distanceBetweenEnCX = character.x - e.x;
+let distanceBetweenEnCY = character.y - e.y;
+if (Math.abs(distanceBetweenEnCX) <= enemySize && Math.abs(distanceBetweenEnCY) <= enemySize) {
+    if (distanceBetweenEnCX <= 0) {
+        character.directionX = 0;
+    }
+
+    if (distanceBetweenEnCX >= 0) {
+        character.directionX = 0;
+    }
+
+    if (distanceBetweenEnCY <= 0) {
+        character.directionY = 0;
+    }
+
+    if (distanceBetweenEnCY >= 0) {
+        character.directionY = 0;
+    }
+    
+}
+}); */

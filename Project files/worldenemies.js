@@ -115,7 +115,7 @@ class Enemy { // Creates the enemy.
                 let distanceBetweenEnCX = this.x - character.x;
                 let distanceBetweenEnCY = this.y - character.y;
 
-                if (distanceBetweenEnCX < characterSize && distanceBetweenEnCY < characterSize) {
+                if (Math.abs(distanceBetweenEnCX) < characterSize && Math.abs(distanceBetweenEnCY) < characterSize) {
                     if (distanceBetweenEnCX <= 0) {
                         if (currentPositionX > 0) {
                             currentPositionX -= 40 - Math.abs(distanceBetweenEnCX);
@@ -126,7 +126,7 @@ class Enemy { // Creates the enemy.
 
                     if (distanceBetweenEnCX >= 0) {
                         if (currentPositionX < canvasSize - characterSize) {
-                            currentPositionX += 40 - distanceBetweenEnCX;
+                            currentPositionX += 40 -Math.abs(distanceBetweenEnCX);
                         } else {
                             currentPositionX = canvasSize - characterSize;
                         }
@@ -142,7 +142,7 @@ class Enemy { // Creates the enemy.
 
                     if (distanceBetweenEnCY >= 0) {
                         if (currentPositionY < canvasSize - characterSize) {
-                            currentPositionY += 40 - distanceBetweenEnCY;
+                            currentPositionY += 40 - Math.abs(distanceBetweenEnCX);
                         } else {
                             currentPositionY = canvasSize - characterSize;
                         }
