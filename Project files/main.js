@@ -18,8 +18,6 @@ let enemyArray = [];
 function createEnemy() {
     if (enemyArray.length <= 2) {
         
-   
-    console.log("listen")
     let randomLocationY = Math.floor(Math.random() * (heightInt - 800 + 1) + 800 - 40);
 
     let randomLocationX = Math.floor(Math.random() * (widthInt) - 40)
@@ -29,6 +27,7 @@ function createEnemy() {
     enemy.insertEnemy();
     enemyArray.push(enemy); }
 }
+
 // Character
 
 
@@ -85,19 +84,31 @@ startButton.addEventListener("click", () => {
 
 // Keybinding 
 
+let enemySize = 40;
+        
+/* let distanceBetweenEnCX = character.x - enemy.x;
+let distanceBetweenEnCY = character.y - enemy.y;
+ */
 window.addEventListener("keydown", function (e) {
     switch (e.key) {
         case "a":
-            character.directionX = -1;
+           character.directionX = -1;
+            updateCharacterPosition(); 
             break;
         case "d":
             character.directionX = 1;
+            updateCharacterPosition();
             break;
         case "w":
             character.directionY = -1;
+            updateCharacterPosition();
             break;
         case "s":
             character.directionY = 1;
+            updateCharacterPosition();
+            break;
+        case " ":
+            character.attacking = true;
             break;
     }
 })
@@ -112,5 +123,38 @@ window.addEventListener("keyup", function (e) {
         case "s":
             character.directionY = 0;
             break;
+        case " ":
+            character.attacking = false;
+            break;
     }
 })
+
+
+
+function updateCharacterPosition() {
+
+    let enemySize = 40;
+    
+    let distanceBetweenEnCX = character.x - enemyArray[0].x;
+    let distanceBetweenEnCY = character.y - enemyArray[0].y;
+
+    console.log(enemyArray[0].x)
+    if (distanceBetweenEnCX <= enemySize && distanceBetweenEnCY <= enemySize) {
+        if (distanceBetweenEnCX <= 0) {
+            character.directionX = 0;
+        }
+
+        if (distanceBetweenEnCX >= 0) {
+            character.directionX = 0;
+        }
+
+        if (distanceBetweenEnCY <= 0) {
+            character.directionY = 0;
+        }
+
+        if (distanceBetweenEnCY >= 0) {
+            character.directionY = 0;
+        }
+        
+    }
+}

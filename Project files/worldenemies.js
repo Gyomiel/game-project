@@ -30,8 +30,7 @@ class Enemy { // Creates the enemy.
     }
 
     enemyMovement() { // Moves the character in its X axis (left and right).
-
-        console.log(this.directionRandom)
+        
 
         if (this.directionRandom === 1) {
             let enemyMoveX = this.x + this.speed * 1;
@@ -68,9 +67,12 @@ class Enemy { // Creates the enemy.
             }
 
             removeEnemy() {
+                if (character.attacking === true) {
                 canvas.removeChild(this.sprite);
-                clearInterval(timerMoveEnemyX)
-                clearInterval(timerMoveEnemyY)
+                clearInterval(timerMoveEnemyX);
+                clearInterval(timerMoveEnemyY);
+                }
+                
 
             }
 
@@ -98,13 +100,59 @@ class Enemy { // Creates the enemy.
 
 
                 if (eVertexBLX >= charVertexTLX && eVertexBLX <= charVertexTRX && eVertexTRY >= charVertexTLY && eVertexTRY <= charVertexBLY || eVertexTRX >= charVertexTLX && eVertexTRX <= charVertexTRX && eVertexBLY >= charVertexTRY && eVertexBRY <= charVertexBRY) {
+                    this.updateEnemyPosition();
                     this.removeEnemy();
-                    console.log("Auch")
+        
                 }
             }
 
+            updateEnemyPosition() {
+                let currentPositionX = this.x;
+                let currentPositionY = this.y;
+                let canvasSize = 1000;
+                let characterSize = 40;
+                
+                let distanceBetweenEnCX = this.x - character.x;
+                let distanceBetweenEnCY = this.y - character.y;
 
+                if (distanceBetweenEnCX < characterSize && distanceBetweenEnCY < characterSize) {
+                    if (distanceBetweenEnCX <= 0) {
+                        if (currentPositionX > 0) {
+                            currentPositionX -= 40 - Math.abs(distanceBetweenEnCX);
+                        } else {
+                            currentPositionX = 0;
+                        }
+                    }
 
+                    if (distanceBetweenEnCX >= 0) {
+                        if (currentPositionX < canvasSize - characterSize) {
+                            currentPositionX += 40 - distanceBetweenEnCX;
+                        } else {
+                            currentPositionX = canvasSize - characterSize;
+                        }
+                    }
+
+                    if (distanceBetweenEnCY <= 0) {
+                        if (currentPositionY > 0) {
+                            currentPositionY -= 40 - Math.abs(distanceBetweenEnCY);
+                        } else {
+                            currentPositionY = 0;
+                        }
+                    }
+
+                    if (distanceBetweenEnCY >= 0) {
+                        if (currentPositionY < canvasSize - characterSize) {
+                            currentPositionY += 40 - distanceBetweenEnCY;
+                        } else {
+                            currentPositionY = canvasSize - characterSize;
+                        }
+                    }
+                    
+                }
+
+                this.sprite.style.top = currentPositionY + "px";
+                this.sprite.style.left = currentPositionX + "px";
+            }
 
         }
 
