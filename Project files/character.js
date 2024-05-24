@@ -10,9 +10,13 @@ class Character { // Creates the character.
         this.directionX = null;
         this.directionY = null;
         this.speed = 10;
-        this.health = 60;
+        this.health = 90;
         this.strenght = 30;
         this.attacking = false;
+    }
+
+    receiveDamage() {
+        
     }
 
 
@@ -26,8 +30,6 @@ class Character { // Creates the character.
     }
 
     characterMovementX() { // Moves the character in its X axis (left and right).
-        
-        
         
         let moveX = this.x + this.speed * this.directionX;
       
@@ -46,42 +48,4 @@ class Character { // Creates the character.
         }
     }
 
-/* 
-    updateCharacterPosition() {
-
-        let enemySize = 40;
-        
-        let distanceBetweenEnCX = this.x - enemy.x;
-        let distanceBetweenEnCY = this.y - enemy.y;
-
-        console.log(enemy.x)
-        if (distanceBetweenEnCX <= enemySize && distanceBetweenEnCY <= enemySize) {
-            if (distanceBetweenEnCX <= 0) {
-                this.directionX = 0;
-            }
-
-            if (distanceBetweenEnCX >= 0) {
-                this.directionX = 0;
-            }
-
-            if (distanceBetweenEnCY <= 0) {
-                this.directionY = 0;
-            }
-
-            if (distanceBetweenEnCY >= 0) {
-                this.directionY = 0;
-            }
-            
-        }
-
-    }
- */
-
-
-
-
-
-    attackingMargin() {
-
-    }
  }

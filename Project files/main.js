@@ -1,4 +1,4 @@
-// Necessary variables
+ // Necessary variables
 
 let canvas = document.getElementById("screen"); // Makes the id="screen" into a variable named canvas.
 canvas.style.width = 1000 + "px";
@@ -30,6 +30,23 @@ let obstaclesFirstTreeColumn = new Obstacles(80, 1000, 0, 0);
 
 let obstaclesSecondTreeColumn = new Obstacles(80, 1000, 920, 0);
 
+// battle screen
+
+let battleScreen = document.getElementById("battlescreen"); // Makes the id="battleScreen" into a variable named canvas.
+battleScreen.style.width = 1000 + "px"; // Setting dimensions
+battleScreen.style.height = 1000 + "px";
+ 
+
+function accessBattle() {
+    if (character.x > 550 && character.x < 650 && character.y < 10) {
+       
+        battleScreen.style.display = "block";
+        canvas.style.display = "none";
+      
+    
+}
+    }
+
 
 
 // Enemies array
@@ -51,6 +68,16 @@ function createEnemy() {
 
 
 // Character
+
+let healthHeart1 = document.createElement("div");
+healthHeart1.setAttribute("id", "heart1");
+
+let healthHeart2 = document.createElement("div");
+healthHeart2.setAttribute("id", "heart2");
+
+let healthHeart3 = document.createElement("div");
+healthHeart3.setAttribute("id", "heart3");
+
 
 let widthInt = canvas.style.width.slice(0, 4);
 let heightInt = canvas.style.width.slice(0, 4);
@@ -139,6 +166,7 @@ window.addEventListener("keydown", function (e) {
             character.attacking = true;
             break;
     }
+    console.log(accessBattle())
 })
 
 window.addEventListener("keyup", function (e) {
@@ -162,7 +190,7 @@ window.addEventListener("keyup", function (e) {
 function updateCharacterPosition() {
 
     let enemySize = 40;
-    let obstacleSize = 220
+   /*  let obstacleSize = 220 */
     
     let distanceBetweenEnCX = character.x - enemyArray[0].x;
     let distanceBetweenEnCY = character.y - enemyArray[0].y;
@@ -170,11 +198,11 @@ function updateCharacterPosition() {
     let distanceBetweenEnCX1 = character.x - enemyArray[1].x;
     let distanceBetweenEnCY1 = character.y - enemyArray[1].y;
 
-    let distanceBetweenEnCX2 = character.x - enemyArray[2].x;
-    let distanceBetweenEnCY2 = character.y - enemyArray[2].y;
+/*     let distanceBetweenEnCX2 = character.x - enemyArray[2].x;
+    let distanceBetweenEnCY2 = character.y - enemyArray[2].y; */
  
-    let distanceBetweenObstaclesX = character.x - obstacles.x;
-    let distanceBetweenObstaclesY = character.y - obstacles.y;
+  /*   let distanceBetweenObstaclesX = character.x - obstacles.x;
+    let distanceBetweenObstaclesY = character.y - obstacles.y; */
  
 
     console.log(enemyArray[0].x)
@@ -216,7 +244,7 @@ function updateCharacterPosition() {
         }
         
     }
-
+/* 
     if (Math.abs(distanceBetweenEnCX2) <= enemySize && Math.abs(distanceBetweenEnCY2) <= obstacleSize) {
         if (distanceBetweenEnCX2 <= 0) {
             character.directionX = 0;
@@ -251,29 +279,6 @@ function updateCharacterPosition() {
 
         if (distanceBetweenObstaclesY >= 0) {
             character.directionY = 0;
-        }
-    }
-}
-
-/* console.log
-let distanceBetweenEnCX = character.x - e.x;
-let distanceBetweenEnCY = character.y - e.y;
-if (Math.abs(distanceBetweenEnCX) <= enemySize && Math.abs(distanceBetweenEnCY) <= enemySize) {
-    if (distanceBetweenEnCX <= 0) {
-        character.directionX = 0;
+        } */
     }
 
-    if (distanceBetweenEnCX >= 0) {
-        character.directionX = 0;
-    }
-
-    if (distanceBetweenEnCY <= 0) {
-        character.directionY = 0;
-    }
-
-    if (distanceBetweenEnCY >= 0) {
-        character.directionY = 0;
-    }
-    
-}
-}); */
