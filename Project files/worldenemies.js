@@ -15,7 +15,7 @@ class Enemy { // Creates the enemy.
     }
 
     insertEnemy() { // Inserts the enemy into the canvas.
-        console.log(this.y, this.x)
+        console.log(this.x, this.y)
         this.sprite.setAttribute("id", "enemy");
         this.sprite.style.top = this.y + "px";
         this.sprite.style.left = this.x + "px";
@@ -107,10 +107,6 @@ class Enemy { // Creates the enemy.
             
                 }
 
-
-                ///////////
-                console.log("Enemy position:", this.x, this.y);
-                /////////
             }
 
             updateEnemyPosition() {
