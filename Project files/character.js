@@ -23,6 +23,10 @@ class Character { // Creates the character.
         this.sprite.style.width = this.width + "px";
         this.sprite.style.height = this.height + "px";
         canvas.appendChild(this.sprite);
+
+        console.log("Character position:", character.x, character.y);
+
+console.log("SOYYYYYYYYYYYYYYYY EL CHARACTERRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
     }
 
     characterMovementX() { // Moves the character in its X axis (left and right).

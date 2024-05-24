@@ -84,7 +84,11 @@ function startGame() { // Starts the game.
     obstaclesSecondTreeRow.insertObstacles();
     obstaclesFirstTreeColumn.insertObstacles();
     obstaclesSecondTreeColumn.insertObstacles();
+/////////////////////////
+console.log("Character position:", character.x, character.y);
 
+console.log("SOYYYYYYYYYYYYYYYY EL CHARACTERRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+///////////////////////
 }
 
 
@@ -120,39 +124,28 @@ let enemySize = 85;
 let distanceBetweenEnCY = character.y - enemy.y;
  */
 window.addEventListener("keydown", function (e) {
-   
+   let collision = updateCharacterPosition();
+
     switch (e.key) {
         case "a":
-            if(updateCharacterPosition()) {
-                character.directionX = 0
-            } else {
-                character.directionX = -1;
-                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
-            }
+            if(!collision) {
+                character.directionX = -1
+            } 
                 break;
         case "d":
-            if(updateCharacterPosition()) {
-                character.directionX = 0
-            } else {
-                character.directionX = 1;
-                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
-            }
+            if(!collision) {
+                character.directionX = 1
+            } 
             break;
         case "w":
-            if(updateCharacterPosition()) {
-                character.directionY = 0
-            } else {
-                character.directionX = 1;
-            }
+            if(!collision) {
+                character.directionY = -1
+            } 
             break;
         case "s":
-            if(updateCharacterPosition()) {
-                character.directionY = 0
-            } else {
-                character.directionX = 1;
-                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
-            }
-            character.directionY = -1;
+            if(!collision) {
+                character.directionY = 1
+            } 
             break;
         case "g":
             character.attacking = true;
@@ -179,117 +172,49 @@ window.addEventListener("keyup", function (e) {
 
 
 function updateCharacterPosition() {
+    console.log("UPDATING POSITIONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+    let collisionDetected = false;
+    let characterPositionBeforeX = character.x;
+    let characterPositionBeforeY = character.y;
 
-    let enemySize = 85;
-    let obstacleSize = 220
+    enemyArray.forEach(enemy => {
+        let distanceX = character.x - enemy.x;
+        let distanceY = character.y - enemy.y;
 
-    //boolean to check if direction turns zero
-    let hasDirectionTurnedZero = false;
-    
-    let distanceBetweenEnCX = character.x - enemyArray[0].x;
-    let distanceBetweenEnCY = character.y - enemyArray[0].y;
+        console.log("Distance X:", distanceX, "Distance Y:", distanceY);
 
-    let distanceBetweenEnCX1 = character.x - enemyArray[1].x;
-    let distanceBetweenEnCY1 = character.y - enemyArray[1].y;
+        if (Math.abs(distanceX) <= enemySize && Math.abs(distanceY) <= enemySize) {
+            if (character.directionX > 0 && distanceX > 0) {
+                console.log("Collision detected: X positive");
+                character.directionX = 0;
+                character.x = Math.max(characterPositionBeforeX - 5, enemy.x + enemy.width);
+                collisionDetected = true;
+            }
 
-    let distanceBetweenEnCX2 = character.x - enemyArray[2].x;
-    let distanceBetweenEnCY2 = character.y - enemyArray[2].y;
- 
-    let distanceBetweenObstaclesX = character.x - obstacles.x;
-    let distanceBetweenObstaclesY = character.y - obstacles.y;
- 
+            if (character.directionX < 0 && distanceX < 0) {
+                console.log("Collision detected: X negative");
+                character.directionX = 0;
+                character.x = Math.min(characterPositionBeforeX + 5, enemy.x - character.width);
+                collisionDetected = true;
+            }
 
-    console.log(enemyArray[0].x)
-    
-    if (Math.abs(distanceBetweenEnCX) <= enemySize && Math.abs(distanceBetweenEnCY) <= enemySize) {
-        if (distanceBetweenEnCX <= 0) {
-            character.directionX = 0;
-            hasDirectionTurnedZero = true;
+            if (character.directionY > 0 && distanceY > 0) {
+                console.log("Collision detected: Y positive");
+                character.directionY = 0;
+                character.y = Math.max(characterPositionBeforeY - 5, enemy.y + enemy.height);
+                collisionDetected = true;
+            }
+
+            if (character.directionY < 0 && distanceY < 0) {
+                console.log("Collision detected: Y negative");
+                character.directionY = 0;
+                character.y = Math.min(characterPositionBeforeY + 5, enemy.y - character.height);
+                collisionDetected = true;
+            }
         }
+    });
 
-        if (distanceBetweenEnCX >= 0) {
-            character.directionX = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenEnCY <= 0) {
-            character.directionY = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenEnCY >= 0) {
-            character.directionY = 0;
-            hasDirectionTurnedZero = true;
-        }
-        
-    }
-
-    if (Math.abs(distanceBetweenEnCX1) <= enemySize && Math.abs(distanceBetweenEnCY1) <= enemySize) {
-        if (distanceBetweenEnCX1 <= 0) {
-            character.directionX = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenEnCX1 >= 0) {
-            character.directionX = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenEnCY1 <= 0) {
-            character.directionY = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenEnCY1 >= 0) {
-            character.directionY = 0;
-            hasDirectionTurnedZero = true;
-        }
-        
-    }
-
-    if (Math.abs(distanceBetweenEnCX2) <= enemySize && Math.abs(distanceBetweenEnCY2) <= obstacleSize) {
-        if (distanceBetweenEnCX2 <= 0) {
-            character.directionX = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenEnCX2 >= 0) {
-            character.directionX = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenEnCY2 <= 0) {
-            character.directionY = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenEnCY2 >= 0) {
-            character.directionY = 0;
-            hasDirectionTurnedZero = true;
-        }
-        
-    }
-
-    if (Math.abs(distanceBetweenObstaclesX) <= enemySize && Math.abs(distanceBetweenObstaclesY) <= obstacleSize) {
-        if (distanceBetweenObstaclesX <= 0) {
-            character.directionX = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenObstaclesX >= 0) {
-            character.directionX = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenObstaclesY <= 0) {
-            character.directionY = 0;
-            hasDirectionTurnedZero = true;
-        }
-
-        if (distanceBetweenObstaclesY >= 0) {
-            character.directionY = 0;
-            hasDirectionTurnedZero = true;
-        }
-        return hasDirectionTurnedZero;
-    }
+    return collisionDetected;
 }
+
+

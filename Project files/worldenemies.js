@@ -21,6 +21,7 @@ class Enemy { // Creates the enemy.
         this.sprite.style.left = this.x + "px";
         this.sprite.style.width = this.width + "px";
         this.sprite.style.height = this.height + "px";
+        this.sprite.style.backgroundColor = "red";
         canvas.appendChild(this.sprite);
 
     }
@@ -105,6 +106,11 @@ class Enemy { // Creates the enemy.
                     this.removeEnemy();
             
                 }
+
+
+                ///////////
+                console.log("Enemy position:", this.x, this.y);
+                /////////
             }
 
             updateEnemyPosition() {
