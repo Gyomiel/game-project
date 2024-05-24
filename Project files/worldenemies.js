@@ -32,8 +32,8 @@ class Enemy { // Creates the enemy.
     enemyMovement() { // Moves the character in its X axis (left and right).
         
         //conservative margin + tree`s width
-        let margin = 180;
-        if (this.directionRandom === 1) {
+        let margin = 170;
+        if (this.directionRandom === 1 && this.x < 850) {
             let enemyMoveX = this.x + this.speed * 1;
             if (enemyMoveX <= 1000 - margin && enemyMoveX >= 0) {
                 this.x = enemyMoveX;
@@ -41,14 +41,14 @@ class Enemy { // Creates the enemy.
                 this.sprite.style.left = this.x + "px";
             }}
 
-            if (this.directionRandom === 2) {
+            if (this.directionRandom === 2 && this.x > 120) {
                 let enemyMoveX = this.x + this.speed * -1;
                 if (enemyMoveX <= 1000 - margin && enemyMoveX >= 0) {
                     this.x = enemyMoveX;
                     this.checkCollisions();
                     this.sprite.style.left = this.x + "px";
                 }}
-                if (this.directionRandom === 3) {
+                if (this.directionRandom === 3 && this.y < 900) {
                     let enemyMoveY = this.y + this.speed * +1;
                     if (enemyMoveY <= 1000 - margin && enemyMoveY >= 0) {
                         this.y = enemyMoveY;
@@ -56,7 +56,7 @@ class Enemy { // Creates the enemy.
                         this.sprite.style.top = this.y + "px";
                     }
                 }
-                if (this.directionRandom === 4) {
+                if (this.directionRandom === 4 && this.y > 120) {
                     let enemyMoveY = this.y + this.speed * -1;
                     if (enemyMoveY <= 1000 - margin && enemyMoveY >= 0) {
                         this.y = enemyMoveY;

@@ -41,11 +41,11 @@ function createEnemy() {
         
         //we add a conservative margin for the position + tree's on the side
 
-    let marginSize = 1000 - 250;
+    let marginSize = 1000 - 120;
 
-    let randomLocationY = Math.floor(Math.random() * (marginSize - 150) + 150);
+    let randomLocationY = Math.floor(Math.random() * (marginSize - 110) + 110);
 
-    let randomLocationX = Math.floor(Math.random() * (marginSize - 150) + 150)
+    let randomLocationX = Math.floor(Math.random() * (marginSize - 110) + 110)
 
     let enemy = new Enemy(randomLocationX, randomLocationY);
 
@@ -120,24 +120,39 @@ let enemySize = 85;
 let distanceBetweenEnCY = character.y - enemy.y;
  */
 window.addEventListener("keydown", function (e) {
+   
     switch (e.key) {
         case "a":
-           character.directionX = -1;
-           character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
-            updateCharacterPosition(); 
-            break;
+            if(updateCharacterPosition()) {
+                character.directionX = 0
+            } else {
+                character.directionX = -1;
+                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
+            }
+                break;
         case "d":
-            character.directionX = 1;
-            character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
-            updateCharacterPosition();
+            if(updateCharacterPosition()) {
+                character.directionX = 0
+            } else {
+                character.directionX = 1;
+                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
+            }
             break;
         case "w":
-            character.directionY = -1;
-            updateCharacterPosition();
+            if(updateCharacterPosition()) {
+                character.directionY = 0
+            } else {
+                character.directionX = 1;
+            }
             break;
         case "s":
-            character.directionY = 1;
-            updateCharacterPosition();
+            if(updateCharacterPosition()) {
+                character.directionY = 0
+            } else {
+                character.directionX = 1;
+                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
+            }
+            character.directionY = -1;
             break;
         case "g":
             character.attacking = true;
@@ -167,6 +182,9 @@ function updateCharacterPosition() {
 
     let enemySize = 85;
     let obstacleSize = 220
+
+    //boolean to check if direction turns zero
+    let hasDirectionTurnedZero = false;
     
     let distanceBetweenEnCX = character.x - enemyArray[0].x;
     let distanceBetweenEnCY = character.y - enemyArray[0].y;
@@ -186,18 +204,22 @@ function updateCharacterPosition() {
     if (Math.abs(distanceBetweenEnCX) <= enemySize && Math.abs(distanceBetweenEnCY) <= enemySize) {
         if (distanceBetweenEnCX <= 0) {
             character.directionX = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCX >= 0) {
             character.directionX = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCY <= 0) {
             character.directionY = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCY >= 0) {
             character.directionY = 0;
+            hasDirectionTurnedZero = true;
         }
         
     }
@@ -205,18 +227,22 @@ function updateCharacterPosition() {
     if (Math.abs(distanceBetweenEnCX1) <= enemySize && Math.abs(distanceBetweenEnCY1) <= enemySize) {
         if (distanceBetweenEnCX1 <= 0) {
             character.directionX = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCX1 >= 0) {
             character.directionX = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCY1 <= 0) {
             character.directionY = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCY1 >= 0) {
             character.directionY = 0;
+            hasDirectionTurnedZero = true;
         }
         
     }
@@ -224,18 +250,22 @@ function updateCharacterPosition() {
     if (Math.abs(distanceBetweenEnCX2) <= enemySize && Math.abs(distanceBetweenEnCY2) <= obstacleSize) {
         if (distanceBetweenEnCX2 <= 0) {
             character.directionX = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCX2 >= 0) {
             character.directionX = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCY2 <= 0) {
             character.directionY = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenEnCY2 >= 0) {
             character.directionY = 0;
+            hasDirectionTurnedZero = true;
         }
         
     }
@@ -243,41 +273,23 @@ function updateCharacterPosition() {
     if (Math.abs(distanceBetweenObstaclesX) <= enemySize && Math.abs(distanceBetweenObstaclesY) <= obstacleSize) {
         if (distanceBetweenObstaclesX <= 0) {
             character.directionX = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenObstaclesX >= 0) {
             character.directionX = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenObstaclesY <= 0) {
             character.directionY = 0;
+            hasDirectionTurnedZero = true;
         }
 
         if (distanceBetweenObstaclesY >= 0) {
             character.directionY = 0;
+            hasDirectionTurnedZero = true;
         }
+        return hasDirectionTurnedZero;
     }
 }
-
-/* console.log
-let distanceBetweenEnCX = character.x - e.x;
-let distanceBetweenEnCY = character.y - e.y;
-if (Math.abs(distanceBetweenEnCX) <= enemySize && Math.abs(distanceBetweenEnCY) <= enemySize) {
-    if (distanceBetweenEnCX <= 0) {
-        character.directionX = 0;
-    }
-
-    if (distanceBetweenEnCX >= 0) {
-        character.directionX = 0;
-    }
-
-    if (distanceBetweenEnCY <= 0) {
-        character.directionY = 0;
-    }
-
-    if (distanceBetweenEnCY >= 0) {
-        character.directionY = 0;
-    }
-    
-}
-}); */
