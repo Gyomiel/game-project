@@ -39,9 +39,13 @@ let enemyArray = [];
 function createEnemy() {
     if (enemyArray.length <= 2) {
         
-    let randomLocationY = Math.floor(Math.random() * (heightInt - 800 + 1) + 800 - 40);
+        //we add a conservative margin for the position + tree's on the side
 
-    let randomLocationX = Math.floor(Math.random() * (widthInt) - 40)
+    let marginSize = 1000 - 250;
+
+    let randomLocationY = Math.floor(Math.random() * (marginSize - 150) + 150);
+
+    let randomLocationX = Math.floor(Math.random() * (marginSize - 150) + 150)
 
     let enemy = new Enemy(randomLocationX, randomLocationY);
 
@@ -110,7 +114,7 @@ startButton.addEventListener("click", () => {
 
 // Keybinding 
 
-let enemySize = 40;
+let enemySize = 85;
         
 /* let distanceBetweenEnCX = character.x - enemy.x;
 let distanceBetweenEnCY = character.y - enemy.y;
@@ -161,7 +165,7 @@ window.addEventListener("keyup", function (e) {
 
 function updateCharacterPosition() {
 
-    let enemySize = 40;
+    let enemySize = 85;
     let obstacleSize = 220
     
     let distanceBetweenEnCX = character.x - enemyArray[0].x;

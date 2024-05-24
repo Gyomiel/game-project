@@ -31,10 +31,11 @@ class Enemy { // Creates the enemy.
 
     enemyMovement() { // Moves the character in its X axis (left and right).
         
-
+        //conservative margin + tree`s width
+        let margin = 180;
         if (this.directionRandom === 1) {
             let enemyMoveX = this.x + this.speed * 1;
-            if (enemyMoveX <= 1000 - this.width && enemyMoveX >= 0) {
+            if (enemyMoveX <= 1000 - margin && enemyMoveX >= 0) {
                 this.x = enemyMoveX;
                 this.checkCollisions();
                 this.sprite.style.left = this.x + "px";
@@ -42,14 +43,14 @@ class Enemy { // Creates the enemy.
 
             if (this.directionRandom === 2) {
                 let enemyMoveX = this.x + this.speed * -1;
-                if (enemyMoveX <= 1000 - this.width && enemyMoveX >= 0) {
+                if (enemyMoveX <= 1000 - margin && enemyMoveX >= 0) {
                     this.x = enemyMoveX;
                     this.checkCollisions();
                     this.sprite.style.left = this.x + "px";
                 }}
                 if (this.directionRandom === 3) {
                     let enemyMoveY = this.y + this.speed * +1;
-                    if (enemyMoveY <= 1000 - this.height && enemyMoveY >= 0) {
+                    if (enemyMoveY <= 1000 - margin && enemyMoveY >= 0) {
                         this.y = enemyMoveY;
                         this.checkCollisions();
                         this.sprite.style.top = this.y + "px";
@@ -57,7 +58,7 @@ class Enemy { // Creates the enemy.
                 }
                 if (this.directionRandom === 4) {
                     let enemyMoveY = this.y + this.speed * -1;
-                    if (enemyMoveY <= 1000 - this.height && enemyMoveY >= 0) {
+                    if (enemyMoveY <= 1000 - margin && enemyMoveY >= 0) {
                         this.y = enemyMoveY;
                         this.checkCollisions();
                         this.sprite.style.top = this.y + "px";
@@ -99,10 +100,10 @@ class Enemy { // Creates the enemy.
                 let charVertexBRY = character.y + character.height;
 
 
-                if (eVertexBLX >= charVertexTLX && eVertexBLX <= charVertexTRX && eVertexTRY >= charVertexTLY && eVertexTRY <= charVertexBLY || eVertexTRX >= charVertexTLX && eVertexTRX <= charVertexTRX && eVertexBLY >= charVertexTRY && eVertexBRY <= charVertexBRY) {
+                if (eVertexTRX >= charVertexTLX && eVertexTRX <= charVertexTRX && eVertexTRY >= charVertexTLX && eVertexTRY <= charVertexBLX || eVertexTLX >= charVertexTLX && eVertexTLX <= charVertexTRX && eVertexTLY >= charVertexTRX && eVertexTLY <= charVertexBRY ||  eVertexBRX >= charVertexTLX && eVertexBRX <= charVertexTRX && eVertexBRY >= charVertexTLX && eVertexBRY <= charVertexBLX || eVertexBLX >= charVertexTLX && eVertexBLX <= charVertexTRX && eVertexBLY >= charVertexTRX && eVertexBLY <= charVertexBRY ) {
                     this.updateEnemyPosition();
                     this.removeEnemy();
-        
+            
                 }
             }
 
@@ -110,7 +111,7 @@ class Enemy { // Creates the enemy.
                 let currentPositionX = this.x;
                 let currentPositionY = this.y;
                 let canvasSize = 1000;
-                let characterSize = 40;
+                let characterSize = 90;
                 
                 let distanceBetweenEnCX = this.x - character.x;
                 let distanceBetweenEnCY = this.y - character.y;
@@ -118,7 +119,7 @@ class Enemy { // Creates the enemy.
                 if (Math.abs(distanceBetweenEnCX) < characterSize && Math.abs(distanceBetweenEnCY) < characterSize) {
                     if (distanceBetweenEnCX <= 0) {
                         if (currentPositionX > 0) {
-                            currentPositionX -= 40 - Math.abs(distanceBetweenEnCX);
+                            currentPositionX -= 75 - Math.abs(distanceBetweenEnCX);
                         } else {
                             currentPositionX = 0;
                         }
@@ -126,7 +127,7 @@ class Enemy { // Creates the enemy.
 
                     if (distanceBetweenEnCX >= 0) {
                         if (currentPositionX < canvasSize - characterSize) {
-                            currentPositionX += 40 -Math.abs(distanceBetweenEnCX);
+                            currentPositionX += 70 -Math.abs(distanceBetweenEnCX);
                         } else {
                             currentPositionX = canvasSize - characterSize;
                         }
@@ -134,7 +135,7 @@ class Enemy { // Creates the enemy.
 
                     if (distanceBetweenEnCY <= 0) {
                         if (currentPositionY > 0) {
-                            currentPositionY -= 40 - Math.abs(distanceBetweenEnCY);
+                            currentPositionY -= 75 - Math.abs(distanceBetweenEnCY);
                         } else {
                             currentPositionY = 0;
                         }
@@ -142,7 +143,7 @@ class Enemy { // Creates the enemy.
 
                     if (distanceBetweenEnCY >= 0) {
                         if (currentPositionY < canvasSize - characterSize) {
-                            currentPositionY += 40 - Math.abs(distanceBetweenEnCX);
+                            currentPositionY += 75 - Math.abs(distanceBetweenEnCX);
                         } else {
                             currentPositionY = canvasSize - characterSize;
                         }
