@@ -76,49 +76,39 @@ class Enemy { // Creates the enemy.
 
             }
 
-            checkCollisions() {
-                let eVertexTLX = this.x;
-                let eVertexTLY = this.y;
-                let eVertexTRX = this.x + this.width;
-                let eVertexTRY = this.y;
+                   checkCollisions() {
 
-                let eVertexBLX = this.x;
-                let eVertexBLY = this.y + this.height;
-                let eVertexBRX = this.x + this.width;
-                let eVertexBRY = this.y + this.height;
+                let enemyX = this.x
+                let characterX = character.x
 
+                let enemyY = this.y
+                let characterY = character.y
+                
+                let enemyXRight = this.x + this.width
+                let characterXRight = character.x + character.width
 
-                let charVertexTLX = character.x;
-                let charVertexTLY = character.y;
-                let charVertexTRX = character.x + character.width;
-                let charVertexTRY = character.y;
-
-                let charVertexBLX = character.x;
-                let charVertexBLY = character.y + character.height;
-                let charVertexBRX = character.x + character.width;
-                let charVertexBRY = character.y + character.height;
-
-
-                if (eVertexBLX >= charVertexTLX && eVertexBLX <= charVertexTRX && eVertexTRY >= charVertexTLY && eVertexTRY <= charVertexBLY || eVertexTRX >= charVertexTLX && eVertexTRX <= charVertexTRX && eVertexBLY >= charVertexTRY && eVertexBRY <= charVertexBRY) {
-                    this.updateEnemyPosition();
-                    this.removeEnemy();
-        
-                }
+                let enemyYBottom = this.y + this.height
+                let characterYBottom = character.y + character.height
+                if (enemyX < characterXRight + +10 && enemyXRight > characterX + 10 &&
+                    enemyY < characterYBottom + 10 && enemyYBottom > characterY + 10 ) {
+                        character.directionX = 0;
+                    character.directionY = 0;
+                    this.speed = 0;
+                        this.updateEnemyPosition(); 
+                        return true;
+                    } else {
+                        return false;
+                    }
+                
             }
 
+            //charVertexBLX >= eVertexBRX && charVertexBLX <= eVertexBRX && eVertexTRY >= charVertexTLY && eVertexTRY <= charVertexBLY
             updateEnemyPosition() {
                 let currentPositionX = this.x;
                 let currentPositionY = this.y;
                 let canvasSize = 1000;
                 let characterSize = 40;
-                
-                let distanceBetweenEnCX = this.x - character.x;
-                let distanceBetweenEnCY = this.y - character.y;
-
-                if (Math.abs(distanceBetweenEnCX) < characterSize && Math.abs(distanceBetweenEnCY) < characterSize) {
-                    if (distanceBetweenEnCX <= 0) {
-                        if (currentPositionX > 0) {
-                            currentPositionX -= 40 - Math.abs(distanceBetweenEnCX);
+                character.directionY = 0;(distanceBetweenEnCX);
                         } else {
                             currentPositionX = 0;
                         }

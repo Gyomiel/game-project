@@ -13,9 +13,32 @@ let timerCreateEnemy;
 
 // Create obstacles
 
-let obstaclesCentralTrees = new Obstacles(82, 350, 333, 140);
+let obstaclesCentralTrees = new Obstacles(82, 365, 333, 135);
 obstaclesCentralTrees.sprite.style.backgroundColor = "#FF0000";
-console.log()
+let obstaclesFirstTrunk = new Obstacles(275, 30, 60, 225);
+obstaclesFirstTrunk.sprite.style.backgroundColor = "#FF0000";
+let obstaclesSecondTrunk = new Obstacles(275, 30, 60, 440);
+obstaclesSecondTrunk.sprite.style.backgroundColor = "#FF0000";
+let obstaclesThirdTrunk = new Obstacles(275, 30, 392, 225);
+obstaclesThirdTrunk.sprite.style.backgroundColor = "#FF0000";
+
+
+let obstaclesFirstTreeRow = new Obstacles(420, 85, 0, 0);
+obstaclesFirstTreeRow.sprite.style.backgroundColor = "#FF0000";
+
+let obstaclesSecondTreeRow = new Obstacles(420, 85, 580, 0);
+obstaclesSecondTreeRow.sprite.style.backgroundColor = "#FF0000";
+
+let obstaclesFirstTreeColumn = new Obstacles(80, 1000, 0, 0);
+obstaclesFirstTreeColumn.sprite.style.backgroundColor = "#FF0000";
+
+let obstaclesSecondTreeColumn = new Obstacles(80, 1000, 920, 0);
+obstaclesSecondTreeColumn.sprite.style.backgroundColor = "#FF0000";
+
+
+
+
+
 
 
 // Enemies array
@@ -62,6 +85,13 @@ function startGame() { // Starts the game.
         createEnemy(), 1000)
 
     obstaclesCentralTrees.insertObstacles();
+    obstaclesFirstTrunk.insertObstacles();
+    obstaclesSecondTrunk.insertObstacles();
+    obstaclesThirdTrunk.insertObstacles();
+    obstaclesFirstTreeRow.insertObstacles();
+    obstaclesSecondTreeRow.insertObstacles();
+    obstaclesFirstTreeColumn.insertObstacles();
+    obstaclesSecondTreeColumn.insertObstacles();
 
 
 }
@@ -99,29 +129,67 @@ let enemySize = 40;
 let distanceBetweenEnCY = character.y - enemy.y;
  */
 window.addEventListener("keydown", function (e) {
+    for(let i = 0; i < enemyArray.length; i++){
+        let enemy = enemyArray[i]
 
-    switch (e.key) {
-        case "a":
-           character.directionX = -1;
-            updateCharacterPosition(); 
-            break;
-        case "d":
-            character.directionX = 1;
-            updateCharacterPosition();
-            break;
-        case "w":
-            character.directionY = -1;
-            updateCharacterPosition();
-            break;
-        case "s":
-            character.directionY = 1;
-            updateCharacterPosition();
-            break;
-        case " ":
-            character.attacking = true;
-            break;
-    }
-})
+        if(enemy.checkCollisions()) {
+            switch (e.key) {
+                    case "a":
+                        
+                    enemy.checkCollisions()
+            
+                        break;
+                    case "d":
+                        enemy.checkCollisions()
+                       
+                 
+                        break;
+                    case "w":
+                    
+                    enemy.checkCollisions()
+                           
+                        break;
+                    case "s":
+                        enemy.checkCollisions()
+                            
+                        break;
+                    case " ":
+                        character.attacking = true;
+                        break;
+           
+            }
+        } else {
+            switch (e.key) {
+                case "a":
+                    
+                        character.directionX = -1;
+        
+                    break;
+                case "d":
+                   
+                        character.directionX = 1;
+                   
+             
+                    break;
+                case "w":
+                
+                        character.directionY = -1;
+                       
+                    break;
+                case "s":
+                   
+                        character.directionY = 1;
+                        
+                    break;
+                case " ":
+                    character.attacking = true;
+                    break;
+       
+        }
+    } 
+}
+
+}) 
 
 window.addEventListener("keyup", function (e) {
     
@@ -136,6 +204,7 @@ window.addEventListener("keyup", function (e) {
             break;
         case " ":
             character.attacking = false;
+            character.sprite.style.backgroundImage = "url('../sprites/Link-standing.gif')"
             break;
     }
 })
