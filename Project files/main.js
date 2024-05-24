@@ -128,23 +128,32 @@ window.addEventListener("keydown", function (e) {
 
     switch (e.key) {
         case "a":
+            console.log("LA DIRECCION ESSSSSSSSSS: " + character.directionX)
+            console.log(character.directionX)
             if(!collision) {
                 character.directionX = -1
+                console.log("INCORRECTA ")
             } 
                 break;
         case "d":
+            console.log("LA DIRECCION ESSSSSSSSSS: " + character.directionX)
             if(!collision) {
                 character.directionX = 1
+                console.log("INCORRECTA ")
             } 
             break;
         case "w":
+            console.log("LA DIRECCION ESSSSSSSSSS: " + character.directionX)
             if(!collision) {
                 character.directionY = -1
+                console.log("INCORRECTA ")
             } 
             break;
         case "s":
+            console.log("LA DIRECCION ESSSSSSSSSS: " + character.directionX)
             if(!collision) {
                 character.directionY = 1
+                console.log("INCORRECTA ")
             } 
             break;
         case "g":
@@ -172,11 +181,19 @@ window.addEventListener("keyup", function (e) {
 
 
 function updateCharacterPosition() {
-    console.log("UPDATING POSITIONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+
+
+    console.log("UPDATING POSITIONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN")
+
+
     let collisionDetected = false;
+
+    //we change the character position to the previous one, so we can revert the advancement
+
     let characterPositionBeforeX = character.x;
     let characterPositionBeforeY = character.y;
 
+   
     enemyArray.forEach(enemy => {
         let distanceX = character.x - enemy.x;
         let distanceY = character.y - enemy.y;
@@ -185,34 +202,65 @@ function updateCharacterPosition() {
 
         if (Math.abs(distanceX) <= enemySize && Math.abs(distanceY) <= enemySize) {
             if (character.directionX > 0 && distanceX > 0) {
-                console.log("Collision detected: X positive");
+
+                console.log("colisionandoooooooo")
+
                 character.directionX = 0;
-                character.x = Math.max(characterPositionBeforeX - 5, enemy.x + enemy.width);
+
+                console.log(character.directionX)
+
+                character.x = characterPositionBeforeX - 5;
                 collisionDetected = true;
             }
+                
+                if (character.directionX < 0 && distanceX < 0) {
+                
+                    console.log("colisionandoooooooo")
 
-            if (character.directionX < 0 && distanceX < 0) {
-                console.log("Collision detected: X negative");
-                character.directionX = 0;
-                character.x = Math.min(characterPositionBeforeX + 5, enemy.x - character.width);
+                    character.directionX = 0;
+
+                    console.log(character.directionX)
+
+                character.x = characterPositionBeforeX + 5;
                 collisionDetected = true;
-            }
-
-            if (character.directionY > 0 && distanceY > 0) {
-                console.log("Collision detected: Y positive");
+            } if (character.directionY > 0 && distanceY > 0) {
                 character.directionY = 0;
-                character.y = Math.max(characterPositionBeforeY - 5, enemy.y + enemy.height);
+                console.log("colisionandoooooooo")
+
+              
+                
+                console.log(character.directionY)
+                character.y = characterPositionBeforeY + 5
                 collisionDetected = true;
             }
-
-            if (character.directionY < 0 && distanceY < 0) {
-                console.log("Collision detected: Y negative");
+                
+               if (character.directionY < 0 && distanceY < 0) {
                 character.directionY = 0;
-                character.y = Math.min(characterPositionBeforeY + 5, enemy.y - character.height);
+                console.log("colisionandoooooooo")
+
+              
+                
+                console.log(character.directionY)
+                character.y = characterPositionBeforeY - 5
                 collisionDetected = true;
             }
         }
     });
+
+    /* let distanceX = character.x - obstacles.x;
+    let distanceY = character.y - obstacles.y;
+
+    if (Math.abs(distanceX) <= obstacleSize && Math.abs(distanceY) <= obstacleSize) {
+        if ((character.directionX > 0 && distanceX > 0) || (character.directionX < 0 && distanceX < 0)) {
+            character.directionX = 0;
+            collisionDetected = true;
+        }
+        
+        if ((character.directionY > 0 && distanceY > 0) || (character.directionY < 0 && distanceY < 0)) {
+            character.directionY = 0;
+            collisionDetected = true;
+        }
+    } */
 
     return collisionDetected;
 }
