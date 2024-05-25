@@ -37,7 +37,7 @@ battleScreen.style.width = 1000 + "px"; // Setting dimensions
 battleScreen.style.height = 1000 + "px";
  
 
-function accessBattle() {
+/* function accessBattle() {
     if (character.x > 550 && character.x < 650 && character.y < 10) {
        
         battleScreen.style.display = "block";
@@ -46,7 +46,7 @@ function accessBattle() {
     
 }
     }
-
+ */
 
 
 // Enemies array
@@ -55,9 +55,9 @@ let enemyArray = [];
 function createEnemy() {
     if (enemyArray.length <= 2) {
         
-    let randomLocationY = Math.floor(Math.random() * (heightInt - 800 + 1) + 800 - 40);
+    let randomLocationY = Math.floor(Math.random() * ((1000 - 75 - 120) - 130 ) + 130);
 
-    let randomLocationX = Math.floor(Math.random() * (widthInt) - 40)
+    let randomLocationX = Math.floor(Math.random() * ((1000 - 75 - 120) - 130) + 130)
 
     let enemy = new Enemy(randomLocationX, randomLocationY);
 
@@ -136,8 +136,6 @@ startButton.addEventListener("click", () => {
 
 // Keybinding 
 
-let enemySize = 40;
-
 window.addEventListener("keydown", function (e) {
     let collisionDetected = false;
     for (let i = 0; i < enemyArray.length; i++) {
@@ -153,6 +151,7 @@ window.addEventListener("keydown", function (e) {
                 character.directionX = -1;
                 character.speed = 10;
                 character.characterMovementX();
+
                 break;
             case "d":
                 character.directionX = 1;

@@ -32,30 +32,37 @@ class Enemy { // Creates the enemy.
         let previousX = this.x;
         let previousY = this.y;
     
+        //margin
+
+        let marginRight = this.width + 95;//95 px por árboles
+        let marginLeft = 95; 
+        let marginBottomAndTop = 95;
+        
+
         if (this.directionRandom === 1) {
             let enemyMoveX = this.x + this.speed * 1;
-            if (enemyMoveX <= 1000 - this.width && enemyMoveX >= 0) {
+            if (enemyMoveX <= 1000 - marginRight && enemyMoveX >= marginLeft ) {
                 this.x = enemyMoveX;
             }
         }
     
         if (this.directionRandom === 2) {
             let enemyMoveX = this.x + this.speed * -1;
-            if (enemyMoveX <= 1000 - this.width && enemyMoveX >= 0) {
+            if (enemyMoveX <= 1000 - marginRight && enemyMoveX >= marginLeft) {
                 this.x = enemyMoveX;
             }
         }
     
         if (this.directionRandom === 3) {
             let enemyMoveY = this.y + this.speed * 1;
-            if (enemyMoveY <= 1000 - this.height && enemyMoveY >= 0) {
+            if (enemyMoveY <= 1000 - marginBottomAndTop &&  enemyMoveY >= marginBottomAndTop) {
                 this.y = enemyMoveY;
             }
         }
     
         if (this.directionRandom === 4) {
             let enemyMoveY = this.y + this.speed * -1;
-            if (enemyMoveY <= 1000 - this.height && enemyMoveY >= 0) {
+            if (enemyMoveY <= 1000 - marginBottomAndTop && enemyMoveY >= marginBottomAndTop) {
                 this.y = enemyMoveY;
             }
         }
