@@ -35,14 +35,7 @@ obstaclesFirstTreeColumn.sprite.style.backgroundColor = "#FF0000";
 let obstaclesSecondTreeColumn = new Obstacles(80, 1000, 920, 0);
 obstaclesSecondTreeColumn.sprite.style.backgroundColor = "#FF0000";
 
-
-
-
-
-
-
 // Enemies array
-
 let enemyArray = [];
 
 function createEnemy() {
@@ -129,67 +122,42 @@ let enemySize = 40;
 let distanceBetweenEnCY = character.y - enemy.y;
  */
 window.addEventListener("keydown", function (e) {
-    for(let i = 0; i < enemyArray.length; i++){
-        let enemy = enemyArray[i]
-
-        if(enemy.checkCollisions()) {
-            switch (e.key) {
-                    case "a":
-                        
-                    enemy.checkCollisions()
-            
-                        break;
-                    case "d":
-                        enemy.checkCollisions()
-                       
-                 
-                        break;
-                    case "w":
-                    
-                    enemy.checkCollisions()
-                           
-                        break;
-                    case "s":
-                        enemy.checkCollisions()
-                            
-                        break;
-                    case " ":
-                        character.attacking = true;
-                        break;
-           
-            }
-        } else {
-            switch (e.key) {
-                case "a":
-                    
-                        character.directionX = -1;
-        
-                    break;
-                case "d":
-                   
-                        character.directionX = 1;
-                   
-             
-                    break;
-                case "w":
-                
-                        character.directionY = -1;
-                       
-                    break;
-                case "s":
-                   
-                        character.directionY = 1;
-                        
-                    break;
-                case " ":
-                    character.attacking = true;
-                    break;
-       
+    let collisionDetected = false;
+    for (let i = 0; i < enemyArray.length; i++) {
+        if (character.checkCollisionsWithEnemies(enemyArray)) {
+            collisionDetected = true;
+            break;
         }
-    } 
-}
+    }
 
-}) 
+    if (!collisionDetected) {
+        switch (e.key) {
+            case "a":
+                character.directionX = -1;
+                character.speed = 10;
+                character.characterMovementX();
+                break;
+            case "d":
+                character.directionX = 1;
+                character.speed = 10;
+                character.characterMovementX();
+                break;
+            case "w":
+                character.directionY = -1;
+                character.speed = 10;
+                character.characterMovementY();
+                break;
+            case "s":
+                character.directionY = 1;
+                character.speed = 10;
+                character.characterMovementY();
+                break;
+            case " ":
+                character.attacking = true;
+                break;
+        }
+    }
+});
 
 window.addEventListener("keyup", function (e) {
     
