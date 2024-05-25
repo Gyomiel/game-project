@@ -31,7 +31,7 @@ body {
 }
 
 #healthbar {
-  background-image: url(../sprites/heart.png);
+  background-image: url(../sprites/heart_jon_phillips_01.png);
   background-size: contain;
   width: 20px;
   height: 20px;
@@ -56,6 +56,17 @@ body {
     background-size: cover;
     background-position-x: center;
     position: relative;
+}
+
+#battlescreen {
+  width: 1000px;
+  height: 1000px;
+  background-image: url(../images/Background\ battlescreen.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: none;
+  transition: opacity 20s ease-in-out;
 }
 
 #obs {
