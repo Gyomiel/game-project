@@ -33,7 +33,6 @@ let obstaclesSecondTreeColumn = new Obstacles(80, 1000, 920, 0);
 
 
 // Enemies array
-
 let enemyArray = [];
 
 function createEnemy() {
@@ -116,30 +115,42 @@ let enemySize = 40;
 let distanceBetweenEnCY = character.y - enemy.y;
  */
 window.addEventListener("keydown", function (e) {
-    switch (e.key) {
-        case "a":
-           character.directionX = -1;
-           character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
-            updateCharacterPosition(); 
+    let collisionDetected = false;
+    for (let i = 0; i < enemyArray.length; i++) {
+        if (character.checkCollisionsWithEnemies(enemyArray)) {
+            collisionDetected = true;
             break;
-        case "d":
-            character.directionX = 1;
-            character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
-            updateCharacterPosition();
-            break;
-        case "w":
-            character.directionY = -1;
-            updateCharacterPosition();
-            break;
-        case "s":
-            character.directionY = 1;
-            updateCharacterPosition();
-            break;
-        case "g":
-            character.attacking = true;
-            break;
+        }
     }
-})
+
+    if (!collisionDetected) {
+        switch (e.key) {
+            case "a":
+                character.directionX = -1;
+                character.speed = 10;
+                character.characterMovementX();
+                break;
+            case "d":
+                character.directionX = 1;
+                character.speed = 10;
+                character.characterMovementX();
+                break;
+            case "w":
+                character.directionY = -1;
+                character.speed = 10;
+                character.characterMovementY();
+                break;
+            case "s":
+                character.directionY = 1;
+                character.speed = 10;
+                character.characterMovementY();
+                break;
+            case " ":
+                character.attacking = true;
+                break;
+        }
+    }
+});
 
 window.addEventListener("keyup", function (e) {
     switch (e.key) {
