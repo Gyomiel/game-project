@@ -137,36 +137,45 @@ startButton.addEventListener("click", () => {
 // Keybinding 
 
 let enemySize = 40;
-        
-/* let distanceBetweenEnCX = character.x - enemy.x;
-let distanceBetweenEnCY = character.y - enemy.y;
- */
+
 window.addEventListener("keydown", function (e) {
-    switch (e.key) {
-        case "a":
-           character.directionX = -1;
-           character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
-            updateCharacterPosition(); 
+    let collisionDetected = false;
+    for (let i = 0; i < enemyArray.length; i++) {
+        if (character.checkCollisionsWithEnemies(enemyArray)) {
+            collisionDetected = true;
             break;
-        case "d":
-            character.directionX = 1;
-            character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
-            updateCharacterPosition();
-            break;
-        case "w":
-            character.directionY = -1;
-            updateCharacterPosition();
-            break;
-        case "s":
-            character.directionY = 1;
-            updateCharacterPosition();
-            break;
-        case "g":
-            character.attacking = true;
-            break;
+        }
     }
-    console.log(accessBattle())
-})
+
+    if (!collisionDetected) {
+        switch (e.key) {
+            case "a":
+                character.directionX = -1;
+                character.speed = 10;
+                character.characterMovementX();
+                break;
+            case "d":
+                character.directionX = 1;
+                character.speed = 10;
+                character.characterMovementX();
+                break;
+            case "w":
+                character.directionY = -1;
+                character.speed = 10;
+                character.characterMovementY();
+                break;
+            case "s":
+                character.directionY = 1;
+                character.speed = 10;
+                character.characterMovementY();
+                break;
+            case " ":
+                character.attacking = true;
+                break;
+        }
+    }
+});
+
 
 window.addEventListener("keyup", function (e) {
     switch (e.key) {
@@ -183,101 +192,4 @@ window.addEventListener("keyup", function (e) {
             break;
     }
 })
-
-
-
-function updateCharacterPosition() {
-
-    let enemySize = 40;
-   /*  let obstacleSize = 220 */
-    
-    let distanceBetweenEnCX = character.x - enemyArray[0].x;
-    let distanceBetweenEnCY = character.y - enemyArray[0].y;
-
-    let distanceBetweenEnCX1 = character.x - enemyArray[1].x;
-    let distanceBetweenEnCY1 = character.y - enemyArray[1].y;
-
-/*     let distanceBetweenEnCX2 = character.x - enemyArray[2].x;
-    let distanceBetweenEnCY2 = character.y - enemyArray[2].y; */
- 
-  /*   let distanceBetweenObstaclesX = character.x - obstacles.x;
-    let distanceBetweenObstaclesY = character.y - obstacles.y; */
- 
-
-    console.log(enemyArray[0].x)
-    
-    if (Math.abs(distanceBetweenEnCX) <= enemySize && Math.abs(distanceBetweenEnCY) <= enemySize) {
-        if (distanceBetweenEnCX <= 0) {
-            character.directionX = 0;
-        }
-
-        if (distanceBetweenEnCX >= 0) {
-            character.directionX = 0;
-        }
-
-        if (distanceBetweenEnCY <= 0) {
-            character.directionY = 0;
-        }
-
-        if (distanceBetweenEnCY >= 0) {
-            character.directionY = 0;
-        }
-        
-    }
-
-    if (Math.abs(distanceBetweenEnCX1) <= enemySize && Math.abs(distanceBetweenEnCY1) <= enemySize) {
-        if (distanceBetweenEnCX1 <= 0) {
-            character.directionX = 0;
-        }
-
-        if (distanceBetweenEnCX1 >= 0) {
-            character.directionX = 0;
-        }
-
-        if (distanceBetweenEnCY1 <= 0) {
-            character.directionY = 0;
-        }
-
-        if (distanceBetweenEnCY1 >= 0) {
-            character.directionY = 0;
-        }
-        
-    }
-/* 
-    if (Math.abs(distanceBetweenEnCX2) <= enemySize && Math.abs(distanceBetweenEnCY2) <= obstacleSize) {
-        if (distanceBetweenEnCX2 <= 0) {
-            character.directionX = 0;
-        }
-
-        if (distanceBetweenEnCX2 >= 0) {
-            character.directionX = 0;
-        }
-
-        if (distanceBetweenEnCY2 <= 0) {
-            character.directionY = 0;
-        }
-
-        if (distanceBetweenEnCY2 >= 0) {
-            character.directionY = 0;
-        }
-        
-    }
-
-    if (Math.abs(distanceBetweenObstaclesX) <= enemySize && Math.abs(distanceBetweenObstaclesY) <= obstacleSize) {
-        if (distanceBetweenObstaclesX <= 0) {
-            character.directionX = 0;
-        }
-
-        if (distanceBetweenObstaclesX >= 0) {
-            character.directionX = 0;
-        }
-
-        if (distanceBetweenObstaclesY <= 0) {
-            character.directionY = 0;
-        }
-
-        if (distanceBetweenObstaclesY >= 0) {
-            character.directionY = 0;
-        } */
-    }
 
