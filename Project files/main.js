@@ -14,21 +14,31 @@ let timerCreateEnemy;
 
 // Create obstacles
 
+let arrayObstacles = [];
+
 let obstaclesCentralTrees = new Obstacles(82, 365, 333, 135);
+arrayObstacles.push(obstaclesCentralTrees);
 
 let obstaclesFirstTrunk = new Obstacles(275, 30, 60, 225);
+arrayObstacles.push(obstaclesFirstTrunk);
 
 let obstaclesSecondTrunk = new Obstacles(275, 30, 60, 440);
+arrayObstacles.push(obstaclesSecondTrunk)
 
 let obstaclesThirdTrunk = new Obstacles(275, 30, 392, 225);
+arrayObstacles.push(obstaclesThirdTrunk)
 
 let obstaclesFirstTreeRow = new Obstacles(420, 85, 0, 0);
+arrayObstacles.push(obstaclesFirstTreeRow)
 
 let obstaclesSecondTreeRow = new Obstacles(420, 85, 580, 0);
+arrayObstacles.push(obstaclesSecondTreeRow)
 
 let obstaclesFirstTreeColumn = new Obstacles(80, 1000, 0, 0);
+arrayObstacles.push(obstaclesFirstTreeColumn);
 
 let obstaclesSecondTreeColumn = new Obstacles(80, 1000, 920, 0);
+arrayObstacles.push(obstaclesSecondTreeColumn);
 
 // battle screen
 
@@ -151,7 +161,7 @@ window.addEventListener("keydown", function (e) {
                 character.directionX = -1;
                 character.speed = 10;
                 character.characterMovementX();
-
+                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
                 break;
             case "d":
                 character.directionX = 1;

@@ -30,14 +30,14 @@ class Character { // Creates the character.
     }
 
     characterMovementX() { // Moves the character in its X axis (left and right).
-        
+        let previousX = this.x;
         let moveX = this.x + this.speed * this.directionX;
 
         if (moveX <= 1000 - this.width && moveX >= 0) {
             this.x = moveX;
         }
 
-        if (this.checkCollisionsWithEnemies(enemyArray)) {
+        if (this.checkCollisionsWithEnemies(enemyArray) || this.checkCollisionsWithObstacles(arrayObstacles)) {
             this.x = previousX;
         }
 
@@ -50,8 +50,13 @@ class Character { // Creates the character.
 
         if (moveY <= 1000 - this.height && moveY >= 0) {
             this.y = moveY;
-            this.sprite.style.top = this.y + "px";
         }
+
+        if (this.checkCollisionsWithEnemies(enemyArray)  || this.checkCollisionsWithObstacles(arrayObstacles)) {
+            this.y = previousY;
+        }
+
+        this.sprite.style.top = this.y + "px";
     }
 
     //we check collisions in the character perspective and in the enemy's
@@ -88,6 +93,43 @@ class Character { // Creates the character.
     this.speed = 8;
     return false;
 }
+
+//checks collisions with obstacles too
+///////////
+checkCollisionsWithObstacles(obstacles) {
+    for (let obstacle of obstacles) {
+        let obstacleX = obstacle.x;
+        let obstacleXRight = obstacle.x + obstacle.width;
+        let obstacleY = obstacle.y;
+        let obstacleYBottom = obstacle.y + obstacle.height;
+
+        let characterXRight = this.x + this.width;
+        let characterYBottom = this.y + this.height;
+
+        if (this.x < obstacleXRight && characterXRight > obstacleX &&
+            this.y < obstacleYBottom && characterYBottom > obstacleY) {
+
+            if (characterXRight > obstacleX && this.x <= obstacleX) {
+                this.x = obstacleX - this.width;
+            } else if (this.x < obstacleXRight && characterXRight >= obstacleXRight) {
+                this.x = obstacleXRight;
+            }
+
+            if (characterYBottom > obstacleY && this.y <= obstacleY) {
+                this.y = obstacleY - this.height;
+            } else if (this.y < obstacleYBottom && characterYBottom >= obstacleYBottom) {
+                this.y = obstacleYBottom;
+            }
+
+            this.speed = 0;//to prevent overlapping from keydown action
+            return true;
+        }
+    }
+
+    this.speed = 8;
+    return false;
+}
+/////////
 }
 
  
