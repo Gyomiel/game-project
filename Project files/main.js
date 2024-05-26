@@ -152,7 +152,7 @@ let counter = 0;
 // Keybinding 
 window.addEventListener("keydown", function (e) {
    
-    if (firstKey && firstKey !== e.key) {
+   /*  if (firstKey && firstKey !== e.key) {
         return
     }
 
@@ -179,7 +179,7 @@ window.addEventListener("keydown", function (e) {
                 delete preshedKey[key];
             }
         }
-    }
+    } */
 
     console.log(preshedKey)
 
@@ -225,7 +225,7 @@ window.addEventListener("keydown", function (e) {
 
 window.addEventListener("keyup", function (e) {
 
-  //we empty the preshedKey object
+ /*  //we empty the preshedKey object
   if (e.key === firstKey) {
     firstKey = null;
 }
@@ -233,7 +233,7 @@ window.addEventListener("keyup", function (e) {
     delete preshedKey[e.key];
     counter = 0;
     console.log(preshedKey);
-    console.log(counter);
+    console.log(counter); */
     switch (e.key) {
         case "a":
         case "d":
