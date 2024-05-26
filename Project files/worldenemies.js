@@ -67,7 +67,7 @@ class Enemy { // Creates the enemy.
             }
         }
     
-        if (this.checkCollisions()) {
+        if (this.checkCollisions() || this.checkCollisionsWithObstacles()) {
             this.x = previousX;
             this.y = previousY;
         }
@@ -121,6 +121,43 @@ class Enemy { // Creates the enemy.
         this.speed = 1;
         return false;
     }
+    checkCollisionsWithObstacles() {
+        for (let i = 0; i < arrayObstacles.length; i++) {
+            let enemyX = this.x;
+            let obstacleX = arrayObstacles[i].x;
+        
+            let enemyY = this.y;
+            let obstacleY = arrayObstacles[i].y;
+        
+            let enemyXRight = this.x + this.width;
+            let obstacleXRight = arrayObstacles[i].x + arrayObstacles[i].width;
+        
+            let enemyYBottom = this.y + this.height;
+            let obstacleYBottom = arrayObstacles[i].y + arrayObstacles[i].height;
+        
+            if (enemyX < obstacleXRight && enemyXRight > obstacleX &&
+                enemyY < obstacleYBottom && enemyYBottom > obstacleY) {
+        
+                if (enemyXRight > obstacleX && enemyX <= obstacleX) {
+                    this.x = obstacleX - this.width;
+                } else if (enemyX < obstacleXRight && enemyXRight >= obstacleXRight) {
+                    this.x = obstacleXRight;
+                }
+        
+                if (enemyYBottom > obstacleY && enemyY <= obstacleY) {
+                    this.y = obstacleY - this.height;
+                } else if (enemyY < obstacleYBottom && enemyYBottom >= obstacleYBottom) {
+                    this.y = obstacleYBottom;
+                }
+    
+                this.speed = 0;
+                return true;
+            }
+        }
+        this.speed = 1;
+        return false;
+    }
+    
 }
 
 

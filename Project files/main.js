@@ -47,16 +47,13 @@ battleScreen.style.width = 1000 + "px"; // Setting dimensions
 battleScreen.style.height = 1000 + "px";
  
 
-/* function accessBattle() {
-    if (character.x > 550 && character.x < 650 && character.y < 10) {
+function accessBattle() {
+    if (character.x > 333 && character.x < 500 && character.y < 30) {
        
         battleScreen.style.display = "block";
-        canvas.style.display = "none";
-      
-    
-}
+        canvas.style.display = "none"; 
     }
- */
+    }
 
 
 // Enemies array
@@ -65,9 +62,9 @@ let enemyArray = [];
 function createEnemy() {
     if (enemyArray.length <= 2) {
         
-    let randomLocationY = Math.floor(Math.random() * ((1000 - 75 - 120) - 130 ) + 130);
+    let randomLocationY = Math.floor(Math.random() * ((1000 - 75 - 120) - 250 ) + 300);
 
-    let randomLocationX = Math.floor(Math.random() * ((1000 - 75 - 120) - 130) + 130)
+    let randomLocationX = Math.floor(Math.random() * ((1000 - 75 - 120) - 400) + 400)
 
     let enemy = new Enemy(randomLocationX, randomLocationY);
 
@@ -144,45 +141,9 @@ startButton.addEventListener("click", () => {
 });
 
 
-
-//restriction to just one key preshed at a time
-let preshedKey = {};
-let firstKey = null;
-let counter = 0;
 // Keybinding 
+
 window.addEventListener("keydown", function (e) {
-   
-   /*  if (firstKey && firstKey !== e.key) {
-        return
-    }
-
-    if(!firstKey) {
-        firstKey = e.key
-    }
-
-    preshedKey[e.key] = true;
-
-    if (e.key === firstKey) {
-        counter++;
-    }
-
-    for(let key in preshedKey) {
-        if (preshedKey[key]) {
-            counter++;
-        }
-    }
-    console.log(counter)
-    //event method to not press 2 keys at a time
-    if (counter > 1) {
-        for (let key in preshedKey) {
-            if (key !== firstKey && preshedKey[key]) {
-                delete preshedKey[key];
-            }
-        }
-    } */
-
-    console.log(preshedKey)
-
     let collisionDetected = false;
     for (let i = 0; i < enemyArray.length; i++) {
         if (character.checkCollisionsWithEnemies(enemyArray)) {
@@ -194,23 +155,27 @@ window.addEventListener("keydown", function (e) {
     if (!collisionDetected) {
         switch (e.key) {
             case "a":
+                accessBattle();
                 character.directionX = -1;
                 character.speed = 10;
                 character.characterMovementX();
-                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
+                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
                 break;
             case "d":
+                accessBattle();
                 character.directionX = 1;
                 character.speed = 10;
                 character.characterMovementX();
-                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
+                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
                 break;
             case "w":
+                accessBattle();
                 character.directionY = -1;
                 character.speed = 10;
                 character.characterMovementY();
                 break;
             case "s":
+                accessBattle();
                 character.directionY = 1;
                 character.speed = 10;
                 character.characterMovementY();
@@ -224,16 +189,6 @@ window.addEventListener("keydown", function (e) {
 
 
 window.addEventListener("keyup", function (e) {
-
- /*  //we empty the preshedKey object
-  if (e.key === firstKey) {
-    firstKey = null;
-}
-
-    delete preshedKey[e.key];
-    counter = 0;
-    console.log(preshedKey);
-    console.log(counter); */
     switch (e.key) {
         case "a":
         case "d":
