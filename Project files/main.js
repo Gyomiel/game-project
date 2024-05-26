@@ -47,16 +47,13 @@ battleScreen.style.width = 1000 + "px"; // Setting dimensions
 battleScreen.style.height = 1000 + "px";
  
 
-/* function accessBattle() {
-    if (character.x > 550 && character.x < 650 && character.y < 10) {
+function accessBattle() {
+    if (character.x > 333 && character.x < 500 && character.y < 10) {
        
         battleScreen.style.display = "block";
-        canvas.style.display = "none";
-      
-    
-}
+        canvas.style.display = "none"; 
     }
- */
+    }
 
 
 // Enemies array
@@ -158,23 +155,27 @@ window.addEventListener("keydown", function (e) {
     if (!collisionDetected) {
         switch (e.key) {
             case "a":
+                accessBattle();
                 character.directionX = -1;
                 character.speed = 10;
                 character.characterMovementX();
                 character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
                 break;
             case "d":
+                accessBattle();
                 character.directionX = 1;
                 character.speed = 10;
                 character.characterMovementX();
                 character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
                 break;
             case "w":
+                accessBattle();
                 character.directionY = -1;
                 character.speed = 10;
                 character.characterMovementY();
                 break;
             case "s":
+                accessBattle();
                 character.directionY = 1;
                 character.speed = 10;
                 character.characterMovementY();
