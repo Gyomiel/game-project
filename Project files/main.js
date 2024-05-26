@@ -144,9 +144,45 @@ startButton.addEventListener("click", () => {
 });
 
 
-// Keybinding 
 
+//restriction to just one key preshed at a time
+let preshedKey = {};
+let firstKey = null;
+let counter = 0;
+// Keybinding 
 window.addEventListener("keydown", function (e) {
+   
+    if (firstKey && firstKey !== e.key) {
+        return
+    }
+
+    if(!firstKey) {
+        firstKey = e.key
+    }
+
+    preshedKey[e.key] = true;
+
+    if (e.key === firstKey) {
+        counter++;
+    }
+
+    for(let key in preshedKey) {
+        if (preshedKey[key]) {
+            counter++;
+        }
+    }
+    console.log(counter)
+    //event method to not press 2 keys at a time
+    if (counter > 1) {
+        for (let key in preshedKey) {
+            if (key !== firstKey && preshedKey[key]) {
+                delete preshedKey[key];
+            }
+        }
+    }
+
+    console.log(preshedKey)
+
     let collisionDetected = false;
     for (let i = 0; i < enemyArray.length; i++) {
         if (character.checkCollisionsWithEnemies(enemyArray)) {
@@ -167,6 +203,7 @@ window.addEventListener("keydown", function (e) {
                 character.directionX = 1;
                 character.speed = 10;
                 character.characterMovementX();
+                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')"
                 break;
             case "w":
                 character.directionY = -1;
@@ -178,7 +215,7 @@ window.addEventListener("keydown", function (e) {
                 character.speed = 10;
                 character.characterMovementY();
                 break;
-            case " ":
+            case "g":
                 character.attacking = true;
                 break;
         }
@@ -187,6 +224,16 @@ window.addEventListener("keydown", function (e) {
 
 
 window.addEventListener("keyup", function (e) {
+
+  //we empty the preshedKey object
+  if (e.key === firstKey) {
+    firstKey = null;
+}
+
+    delete preshedKey[e.key];
+    counter = 0;
+    console.log(preshedKey);
+    console.log(counter);
     switch (e.key) {
         case "a":
         case "d":
