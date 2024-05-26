@@ -161,12 +161,13 @@ window.addEventListener("keydown", function (e) {
                 character.directionX = -1;
                 character.speed = 10;
                 character.characterMovementX();
-                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')"
+                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
                 break;
             case "d":
                 character.directionX = 1;
                 character.speed = 10;
                 character.characterMovementX();
+                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
                 break;
             case "w":
                 character.directionY = -1;
@@ -178,7 +179,7 @@ window.addEventListener("keydown", function (e) {
                 character.speed = 10;
                 character.characterMovementY();
                 break;
-            case " ":
+            case "g":
                 character.attacking = true;
                 break;
         }

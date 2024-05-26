@@ -8,6 +8,8 @@ class Enemy { // Creates the enemy.
         this.height = 75;
         this.sprite = document.createElement("div");
         this.speed = 1;
+        this.health = 60;
+        this.strength = 30;
         this.timerMove = setInterval(() => this.enemyMovement(), 10)
         this.directionRandom = 0
         this.timerDirection = setInterval(() => this.randomNumber(), 1000)//changes direction to emulate random movement
