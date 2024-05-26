@@ -107,8 +107,23 @@ checkCollisionsWithObstacles(obstacles) {
         let characterYBottom = this.y + this.height;
 
         if (this.x < obstacleXRight && characterXRight > obstacleX &&
-            this.y < obstacleYBottom && characterYBottom > obstacleY) {
+            this.y < obstacleYBottom && characterYBottom > obstacleY && 
+            !(this.x >= 200 && this.x <= 500 && this.y <= 80 && this.y >= 20)) {
 
+                if (this.directionY == 1 && (
+                    (this.x >= 90 && this.x <= 270 && this.y <= 600 && this.y >= 20) ||
+                    (this.x >= 190 && this.x <= 950 && this.y <= 800 && this.y >= 100))) {
+                    
+                    continue; //goes to the next obstacle directly
+                }
+
+
+                /*  if (this.directionY == 1 && 
+                !(this.x >= 90 && this.x <= 270 && this.y <= 600 && this.y >= 20) &&
+                !(this.x >= 290 && this.x <= 700 && this.y <= 500 && this.y >= 330)) {
+                // Permitir el cruce del obstáculo solo hacia abajo
+                continue; // Continuar con la siguiente iteración del bucle for
+            } */
             if (characterXRight > obstacleX && this.x <= obstacleX) {
                 this.x = obstacleX - this.width;
             } else if (this.x < obstacleXRight && characterXRight >= obstacleXRight) {
@@ -131,5 +146,3 @@ checkCollisionsWithObstacles(obstacles) {
 }
 /////////
 }
-
- 
