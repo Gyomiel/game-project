@@ -132,6 +132,7 @@ creditsButton.addEventListener("click", () => {
 startScreen.addEventListener("click", () => {
     setInterval(() => { stOST.play(); }, 1); });
 
+
 startButton.addEventListener("click", () => {
     heyListen.play(); // Plays the "Hey, Listen!" sound effect when the button is clicked.
 
