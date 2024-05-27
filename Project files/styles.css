@@ -70,6 +70,16 @@ body {
   
 }
 
+
+#dead {
+  display: none;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 260px;
+  left: 180px;
+}
+
 #ganon {
   background-image: url(../sprites/ganonrosario.gif);
   background-size: contain;

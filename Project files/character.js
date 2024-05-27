@@ -48,6 +48,12 @@ class Character { // Creates the character.
     }
  }
 
+     removeLink() {
+        let youDied = document.getElementById("dead");
+        canvas.appendChild(youDied);
+
+}
+
 
     insertCharacter() { // Inserts the character into the canvas.
         this.sprite.setAttribute("id", "character");
