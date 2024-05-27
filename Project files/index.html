@@ -8,8 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
    <script src="startscreen.js" defer></script>
+   <script src="battlescreen.js" defer></script>
     <script src="character.js" defer></script>
     <script src="worldenemies.js" defer></script>
+    <script src="ganon.js" defer></script>
     <script src="obstacles.js" defer></script>
     <script src="main.js" defer></script>
     <title>The Hero of Rhyme</title>
@@ -17,24 +19,11 @@
   <body>
     <div id="startScreen"></div>
     <audio id="stOST" controls><source src="../audio/The Hero of Rhyme.mp3" type="audio/mpeg"></audio>
-    <audio id="heyListen" controls>
-      <source src="../audio/hey_listen.mp3" type="audio/mpeg">
-    </audio> 
+    <audio id="heyListen" controls> <source src="../audio/hey_listen.mp3" type="audio/mpeg"></audio> 
     <audio id="bgOST" controls><source src="../audio/THORbg.mp3" type="audio/mpeg"></audio>
     <button class="btn" type="submit" onclick="">START!</button>
-    <div id="screen">
-      <div id="left-wall"></div>
-      <div id="center-trees"></div>
-      <div id="tree-column"></div>
-      <div id="trunk1"></div>
-      <div id="trunk2"></div>
-      <div id="trunk3"></div>
-      <div id="trunk4"></div>
-      <div id="trunk5"></div>
-      <div id="trunk6"></div>
-      <div id="trunk7"></div>
-
-    </div>
+    <div id="screen"><div id="healthbar"></div></div>
+   <div id="battlescreen"></div>
     
     
   </body>

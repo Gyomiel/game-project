@@ -10,9 +10,13 @@ class Character { // Creates the character.
         this.directionX = null;
         this.directionY = null;
         this.speed = 10;
-        this.health = 60;
+        this.health = 90;
         this.strenght = 30;
         this.attacking = false;
+    }
+
+    receiveDamage() {
+        
     }
 
 
@@ -26,62 +30,106 @@ class Character { // Creates the character.
     }
 
     characterMovementX() { // Moves the character in its X axis (left and right).
-        
-        
-        
+        let previousX = this.x;
         let moveX = this.x + this.speed * this.directionX;
-      
+
         if (moveX <= 1000 - this.width && moveX >= 0) {
             this.x = moveX;
-            this.sprite.style.left = this.x + "px";
         }
+
+        if (this.checkCollisionsWithEnemies(enemyArray) || this.checkCollisionsWithObstacles(arrayObstacles)) {
+            this.x = previousX;
+        }
+
+        this.sprite.style.left = this.x + "px";
     }
 
     characterMovementY() { // Moves the character in its Y axis (up and down).
+        let previousY = this.y;
         let moveY = this.y + this.speed * this.directionY;
-      
+
         if (moveY <= 1000 - this.height && moveY >= 0) {
             this.y = moveY;
-            this.sprite.style.top = this.y + "px";
+        }
+
+        if (this.checkCollisionsWithEnemies(enemyArray)  || this.checkCollisionsWithObstacles(arrayObstacles)) {
+            this.y = previousY;
+        }
+
+        this.sprite.style.top = this.y + "px";
+    }
+
+    //we check collisions in the character perspective and in the enemy's
+ checkCollisionsWithEnemies(enemies) {
+    for (let enemy of enemies) {
+        let enemyX = enemy.x;
+        let enemyXRight = enemy.x + enemy.width;
+        let enemyY = enemy.y;
+        let enemyYBottom = enemy.y + enemy.height;
+
+        let characterXRight = this.x + this.width;
+        let characterYBottom = this.y + this.height;
+
+        if (this.x < enemyXRight && characterXRight > enemyX &&
+            this.y < enemyYBottom && characterYBottom > enemyY) {
+
+            if (characterXRight > enemyX && this.x <= enemyX) {
+                this.x = enemyX - this.width;
+            } else if (this.x < enemyXRight && characterXRight >= enemyXRight) {
+                this.x = enemyXRight;
+            }
+
+            if (characterYBottom > enemyY && this.y <= enemyY) {
+                this.y = enemyY - this.height;
+            } else if (this.y < enemyYBottom && characterYBottom >= enemyYBottom) {
+                this.y = enemyYBottom;
+            }
+
+            this.speed = 0;//to prevent overlapping from keydown action
+            return true;
         }
     }
 
-/* 
-    updateCharacterPosition() {
+    this.speed = 8;
+    return false;
+}
 
-        let enemySize = 40;
-        
-        let distanceBetweenEnCX = this.x - enemy.x;
-        let distanceBetweenEnCY = this.y - enemy.y;
+//checks collisions with obstacles too
+///////////
+checkCollisionsWithObstacles(obstacles) {
+    for (let obstacle of obstacles) {
+        let obstacleX = obstacle.x;
+        let obstacleXRight = obstacle.x + obstacle.width;
+        let obstacleY = obstacle.y;
+        let obstacleYBottom = obstacle.y + obstacle.height;
 
-        console.log(enemy.x)
-        if (distanceBetweenEnCX <= enemySize && distanceBetweenEnCY <= enemySize) {
-            if (distanceBetweenEnCX <= 0) {
-                this.directionX = 0;
+        let characterXRight = this.x + this.width;
+        let characterYBottom = this.y + this.height;
+
+        if (this.x < obstacleXRight && characterXRight > obstacleX &&
+            this.y < obstacleYBottom && characterYBottom > obstacleY) {
+
+            if (characterXRight > obstacleX && this.x <= obstacleX) {
+                this.x = obstacleX - this.width;
+            } else if (this.x < obstacleXRight && characterXRight >= obstacleXRight) {
+                this.x = obstacleXRight;
             }
 
-            if (distanceBetweenEnCX >= 0) {
-                this.directionX = 0;
+            if (characterYBottom > obstacleY && this.y <= obstacleY) {
+                this.y = obstacleY - this.height;
+            } else if (this.y < obstacleYBottom && characterYBottom >= obstacleYBottom) {
+                this.y = obstacleYBottom;
             }
 
-            if (distanceBetweenEnCY <= 0) {
-                this.directionY = 0;
-            }
-
-            if (distanceBetweenEnCY >= 0) {
-                this.directionY = 0;
-            }
-            
+            this.speed = 0;//to prevent overlapping from keydown action
+            return true;
         }
-
     }
- */
 
+    this.speed = 8;
+    return false;
+}
+/////////
+}
 
-
-
-
-    attackingMargin() {
-
-    }
- }
+ 
