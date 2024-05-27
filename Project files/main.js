@@ -52,7 +52,11 @@ function accessBattle() {
        
         battleScreen.style.display = "block";
         canvas.style.display = "none"; 
+        character.insertCharacterIntoBattleScreen();
     }
+
+    
+
     }
 
 
@@ -115,8 +119,8 @@ function startGame() { // Starts the game.
     obstaclesSecondTreeColumn.insertObstacles();
 
     setTimeout(() => {
-        receiveDamage();
-    }, 1000);
+        character.receiveDamage();
+    }, 3000);
 }
 
 
@@ -185,6 +189,7 @@ window.addEventListener("keydown", function (e) {
                 break;
             case "g":
                 character.attacking = true;
+                character.linkAttacksEnemies(enemyArray);
                 break;
         }
     }

@@ -23,7 +23,7 @@ class Enemy { // Creates the enemy.
         this.sprite.style.width = this.width + "px";
         this.sprite.style.height = this.height + "px";
         canvas.appendChild(this.sprite);
-
+        
     }
 
     randomNumber() { // Generates a random direction for the enemies.
