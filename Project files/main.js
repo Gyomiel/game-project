@@ -48,7 +48,7 @@ battleScreen.style.height = 1000 + "px";
  
 
 function accessBattle() {
-    if (character.x > 333 && character.x < 500 && character.y < 10) {
+    if (character.x > 333 && character.x < 500 && character.y < 30) {
        
         battleScreen.style.display = "block";
         canvas.style.display = "none"; 
@@ -62,9 +62,9 @@ let enemyArray = [];
 function createEnemy() {
     if (enemyArray.length <= 2) {
         
-    let randomLocationY = Math.floor(Math.random() * ((1000 - 75 - 120) - 130 ) + 130);
+    let randomLocationY = Math.floor(Math.random() * ((1000 - 75 - 120) - 250 ) + 300);
 
-    let randomLocationX = Math.floor(Math.random() * ((1000 - 75 - 120) - 130) + 130)
+    let randomLocationX = Math.floor(Math.random() * ((1000 - 75 - 120) - 400) + 400)
 
     let enemy = new Enemy(randomLocationX, randomLocationY);
 

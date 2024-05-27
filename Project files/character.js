@@ -13,6 +13,7 @@ class Character { // Creates the character.
         this.health = 90;
         this.strenght = 30;
         this.attacking = false;
+        this.jump = false;
     }
 
     receiveDamage() {
@@ -95,8 +96,9 @@ class Character { // Creates the character.
 }
 
 //checks collisions with obstacles too
-///////////
 checkCollisionsWithObstacles(obstacles) {
+    let jumping = false;
+    
     for (let obstacle of obstacles) {
         let obstacleX = obstacle.x;
         let obstacleXRight = obstacle.x + obstacle.width;
@@ -107,7 +109,16 @@ checkCollisionsWithObstacles(obstacles) {
         let characterYBottom = this.y + this.height;
 
         if (this.x < obstacleXRight && characterXRight > obstacleX &&
-            this.y < obstacleYBottom && characterYBottom > obstacleY) {
+            this.y < obstacleYBottom && characterYBottom > obstacleY && 
+            !(this.x >= 200 && this.x <= 500 && this.y <= 80 && this.y >= 20)) {
+
+            if (this.directionY == 1 && (
+                (this.x >= 90 && this.x <= 270 && this.y <= 600 && this.y >= 20) ||
+                (this.x >= 190 && this.x <= 950 && this.y <= 800 && this.y >= 100))) {
+
+                jumping = true;
+                continue; //goes to the next obstacle directly
+            }
 
             if (characterXRight > obstacleX && this.x <= obstacleX) {
                 this.x = obstacleX - this.width;
@@ -125,11 +136,29 @@ checkCollisionsWithObstacles(obstacles) {
             return true;
         }
     }
+    if (jumping) {
+        this.jump = true;
+        this.jumpFence();
+    }
+    else {
+        this.jump = false;
+        this.jumpFence();
+    }
 
+    this.jump = false;
+    jumping = false;
     this.speed = 8;
     return false;
 }
-/////////
-}
 
- 
+jumpFence() {
+    if (this.jump) {
+        this.sprite.setAttribute("class","jumping");
+        this.speed = 0.5;
+        console.log(this.sprite)
+    } else {
+        this.sprite.removeAttribute("class", "jumping");
+    }
+    
+}
+}
