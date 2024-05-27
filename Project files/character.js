@@ -16,14 +16,14 @@ class Character { // Creates the character.
         this.jump = false;
     }
 
-    receiveDamage(dmg) {
+    /*receiveDamage(dmg) {
         if (this.health <= 0) {
-            alert("YOU DIED");
+            this.removeLink();
         } else {
             this.health -= dmg;
         }
 
-    }
+    }*/
 
     linkAttacksEnemies(enemies) {
         this.attacking = true;
@@ -49,8 +49,7 @@ class Character { // Creates the character.
  }
 
      removeLink() {
-        let youDied = document.getElementById("dead");
-        canvas.appendChild(youDied);
+        alert("ded");
 
 }
 
