@@ -79,12 +79,11 @@ class Enemy { // Creates the enemy.
     }
     
     removeEnemy() {
-        if (character.attacking === true) {
-            canvas.removeChild(this.sprite);
-            clearInterval(this.timerMove);
-            clearInterval(this.timerDirection);
-        }
-    }
+
+        canvas.removeChild(this.sprite);
+        clearInterval(this.timerMove);
+        clearInterval(this.timerDirection);
+}
 
     checkCollisions() {
         let enemyX = this.x;
