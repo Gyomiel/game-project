@@ -195,13 +195,11 @@ window.addEventListener("keydown", function (e) {
         let enemyXRight = enemyArray[i].x + enemyArray[i].width;
         let enemyYBottom = enemyArray[i].y + enemyArray[i].height;
 
-        // Reducir la salud del personaje principal solo una vez por enemigo
-
-        // Verificar colisión
+      
         if (enemyArray[i].x < linkXRight + 2 && enemyXRight > linkX - 2 &&
             enemyArray[i].y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
                 
-                enemyArray[i].attacking = true;
+                enemyArray[i].sprite.classList.add('hit');
                 character.health -= enemyArray[i].strength;
                 character.removeHearts()
                 if(character.directionX === 1) {
@@ -213,8 +211,10 @@ window.addEventListener("keydown", function (e) {
             if (character.health <= 0) {
                 character.removeLink();
             }
+             if (character.checkCollisionsWithEnemies(enemyArray)) {
             collisionDetected = true;
             break;
+        }
         }
     
 }

@@ -8,7 +8,7 @@ class Ganon {
         this.direction = null;
         this.speed = 5;
         this.health = 150;
-        this.strenght = 60;
+        this.strenght = 5;
         this.attacking = false;
 
     }
