@@ -114,6 +114,9 @@ function startGame() { // Starts the game.
     obstaclesFirstTreeColumn.insertObstacles();
     obstaclesSecondTreeColumn.insertObstacles();
 
+    setTimeout(() => {
+        receiveDamage();
+    }, 1000);
 }
 
 

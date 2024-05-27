@@ -17,6 +17,9 @@ class Character { // Creates the character.
     }
 
     receiveDamage() {
+        if (this.health <= 0) {
+            alert("YOU DIED");
+        }
         
     }
 
