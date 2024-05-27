@@ -46,8 +46,8 @@ class Enemy { // Creates the enemy.
                 
                 character.health -= this.strength;
 
-                if (this.x < linkXRight + 20 && enemyXRight > linkX - 20 &&
-                    this.y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
+                if (this.x < linkXRight + 2 && enemyXRight > linkX - 2 &&
+                    this.y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
                         character.health -= this.strength;
                         if(character.health <= 0) {
                             character.removeLink();

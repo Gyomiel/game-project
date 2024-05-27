@@ -48,11 +48,14 @@ let battleScreen = document.getElementById("battlescreen"); // Makes the id="bat
 battleScreen.style.width = 1000 + "px"; // Setting dimensions
 battleScreen.style.height = 1000 + "px";
  
-let ganon
+let ganon;
+let arrayObstaclesBattleScreen = [];;
+
 function accessBattle() {
-    ganon = new Ganon(400, 200);
+
     character.final = true
     if (character.x > 333 && character.x < 500 && character.y < 30) {
+        ganon = new Ganon(400, 200);
         arrayObstacles = []
         clearInterval(timerCreateEnemy)
         for (let i = 0; i<= enemyArray.length; i++) {
@@ -62,17 +65,37 @@ function accessBattle() {
         character.y = 880;
         battleScreen.style.display = "block";
         canvas.style.display = "none"; 
+        
         character.insertCharacterIntoBattleScreen();
         ganon.insertGanon();
         battleScreen.appendChild(healthBar);
 
-    }
+        //obstacles battlescreen
+
+
+        let topWall = new Obstacles(1000, 100, 0, 0);
+        arrayObstaclesBattleScreen.push(topWall)
+        topWall.insertObstaclesGanon()
+
+        let leftWall1 = new Obstacles(150, 500, 0, 0);
+        arrayObstaclesBattleScreen.push(leftWall1)
+        leftWall1.insertObstaclesGanon()
+
+        let leftWall2 = new Obstacles(60, 300, 0, 505);
+        arrayObstaclesBattleScreen.push(leftWall2)
+        leftWall2.insertObstaclesGanon()
+
+        let bottomWall = new Obstacles(650, 300, 0, 700);
+        arrayObstaclesBattleScreen.push(bottomWall);
+        bottomWall.insertObstaclesGanon()
+
+        let rightWall = new Obstacles(200, 1000, 850, 100);
+        arrayObstaclesBattleScreen.push(rightWall);
+        rightWall.insertObstaclesGanon()
+ 
 
     }
-
-
-
-
+    }
 
 // Enemies array
 
@@ -175,9 +198,10 @@ window.addEventListener("keydown", function (e) {
         // Reducir la salud del personaje principal solo una vez por enemigo
 
         // Verificar colisión
-        if (enemyArray[i].x < linkXRight + 5 && enemyXRight > linkX - 5 &&
-            enemyArray[i].y < linkYBottom + 5 && enemyYBottom > linkY - 5) {
+        if (enemyArray[i].x < linkXRight + 2 && enemyXRight > linkX - 2 &&
+            enemyArray[i].y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
                 
+                enemyArray[i].attacking = true;
                 character.health -= enemyArray[i].strength;
                 character.removeHearts()
                 if(character.directionX === 1) {
@@ -195,48 +219,8 @@ window.addEventListener("keydown", function (e) {
     
 }
 
+character.collisionWithGanon();
 
-     //ganon attacks
-     let ganonCollision = false;
-     if (ganon) {
-
-         
-        let ganonX = ganon.x;
-        let ganonXRight = ganon.x + ganon.width;
-        let ganonY = ganon.y;
-        let ganonYBottom = ganon.y + ganon.height;
-
-        let characterXRight = character.x + character.width;
-        let characterYBottom = character.y + character.height;
-
-        if (character.x < ganonXRight && characterXRight > ganonX &&
-            character.y < ganonYBottom && characterYBottom > ganonY) {
-                console.log("HAY COLISIÓN")
-            if (characterXRight > ganonX && character.x <= ganonX) {
-                character.x = ganonX - character.width;
-                console.log("a")
-            } else if (character.x < ganonXRight && characterXRight >= ganonXRight) {
-                character.x = ganonXRight;
-                console.log("b")
-            }
-
-            if (characterYBottom > ganonY && character.y <= ganonY) {
-                character.y = ganonY - character.height;
-                console.log("c")
-            } else if (character.y < ganonYBottom && characterYBottom >= ganonYBottom) {
-                character.y = ganonYBottom;
-                console.log("d")
-            }
-
-           ganonCollision = true;
-           character.speed = 0;
-        }
-    }
-
-    
-   
-
-     
 if (!collisionDetected || !ganonCollision) {
     switch (e.key) {
         case "a":
