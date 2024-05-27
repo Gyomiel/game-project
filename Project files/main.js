@@ -115,9 +115,9 @@ function startGame() { // Starts the game.
     obstaclesFirstTreeColumn.insertObstacles();
     obstaclesSecondTreeColumn.insertObstacles();
 
-    setTimeout(() => {
+    /*setTimeout(() => {
         character.receiveDamage();
-    }, 3000);
+    }, 3000);*/
 
     
 }
@@ -158,7 +158,7 @@ startButton.addEventListener("click", () => {
 window.addEventListener("keydown", function (e) {
     let collisionDetected = false;
     for (let i = 0; i < enemyArray.length; i++) {
-        /* let linkX = character.x;
+        let linkX = character.x;
         let linkXRight = character.x + character.width;
         let linkY = character.y;
         let linkYBottom = character.y + character.height;
@@ -166,21 +166,22 @@ window.addEventListener("keydown", function (e) {
         let enemyXRight = enemyArray[i].x + enemyArray[i].width;
         let enemyYBottom = enemyArray[i].y + enemyArray[i].height;
 
-        character.health -= enemyArray[i].strength;
+        // Reducir la salud del personaje principal solo una vez por enemigo
         
-        if (this.x < linkXRight + 20 && enemyXRight > linkX - 20 &&
-            this.y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
-                enemyArray[i].sprite.style.backgroundImage ="url('../sprites/linkieleft.gif')";
-                character.health -= this.strength;
-                if(character.health <= 0) {
-                    character.removeLink();
-                }
-        
-        if (character.checkCollisionsWithEnemies(enemyArray)) {
+
+        // Verificar colisión
+        if (enemyArray[i].x < linkXRight + 20 && enemyXRight > linkX - 20 &&
+            enemyArray[i].y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
+                character.health -= enemyArray[i].strength;
+                console.log("Auch")
+            character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
+            if (character.health <= 0) {
+                character.removeLink();
+            }
             collisionDetected = true;
             break;
         }
-    } */
+    
 
     if (!collisionDetected) {
         switch (e.key) {

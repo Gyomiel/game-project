@@ -33,7 +33,6 @@ class Enemy { // Creates the enemy.
 
     enemiesAttackLink() {
 
-        this.sprite.style.backgroundImage ="url('../sprites/linkieleft.gif')";
         this.attacking = true;
         if (this.attacking && character.attacking) {
             setInterval(() => {

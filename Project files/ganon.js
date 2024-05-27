@@ -13,7 +13,6 @@ class Ganon {
 
     }
 
-
     insertGanon() { 
         this.sprite.setAttribute("id", "ganon");
         this.sprite.style.top = this.y + "px";
@@ -23,4 +22,15 @@ class Ganon {
         battleScreen.appendChild(this.sprite);
    
     }
+
+    ganonAttacksLink() {
+        this.attacking = true;
+    }
+
+    linkAttacksGanon() {
+        this.attacking = true;
+        
+    }
 }
+
+
