@@ -17,14 +17,6 @@ class Character { // Creates the character.
         this.final = false
     }
 
-    /*receiveDamage(dmg) {
-        if (this.health <= 0) {
-            this.removeLink();
-        } else {
-            this.health -= dmg;
-        }
-
-    }*/
 
     removeHearts() {
         let healthBar = document.getElementById("healthbar");

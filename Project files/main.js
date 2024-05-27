@@ -3,10 +3,14 @@
 let canvas = document.getElementById("screen"); // Makes the id="screen" into a variable named canvas.
 canvas.style.width = 1000 + "px";
 canvas.style.height = 1000 + "px";
-let startButton = document.getElementsByClassName("btn")[0]; // Button that starts the game from the title screen.
+let startButton = document.getElementsByClassName("startbtn")[0]; // Button that starts the game from the title screen.
 let startScreen = document.getElementById("startScreen"); // Makes the id="startScreen" into a variable named startScreen.
+let creditsButton = document.getElementsByClassName("creditsbtn");
+let creditsScreen = document.getElementById("creditsScreen");
 let heyListen = document.getElementById("heyListen"); // "Hey, listen!" sound effect for the button.
-let stOST = document.getElementById("stOST"); // "The Hero of Rhyme" soundtrack for the title screen.
+let bgOST = document.getElementById("bgOST"); 
+let stOST = document.getElementById("stOST"); // "Let's fighting love" soundtrack for the title screen.
+let ganonOST = document.getElementById("ganonOST") // "Dale, Zelda, dale" soundtrack for the battle with Ganon.
 let timerMoveCharacterX; // Moving time interval on X axis.
 let timerMoveCharacterY; // Moving time interval on Y axis.
 let timerCreateEnemy;
@@ -14,7 +18,8 @@ let healthBar = document.getElementById("healthbar");
 healthBar.style.display = "none";
 
 let enemyArray = [];
-// Create obstacles
+
+// Creating obstacles
 
 let arrayObstacles = [];
 
@@ -66,13 +71,7 @@ function accessBattle() {
         ganon.insertGanon();
         battleScreen.appendChild(healthBar);
 
-    }
-
-    }
-
-
-
-
+    }};
 
 // Enemies array
 
@@ -86,9 +85,7 @@ function createEnemy() {
     let enemy = new Enemy(randomLocationX, randomLocationY);
 
     enemy.insertEnemy();
-    enemyArray.push(enemy); }
-}
-
+    enemyArray.push(enemy); }};
 
 // Character
 
@@ -120,27 +117,22 @@ function startGame() { // Starts the game.
     obstaclesSecondTreeRow.insertObstacles();
     obstaclesFirstTreeColumn.insertObstacles();
     obstaclesSecondTreeColumn.insertObstacles();
+ 
+};
 
-    /*setTimeout(() => {
-        character.receiveDamage();
-    }, 3000);*/
+/*// Credits button
 
-    
-}
+creditsButton.addEventListener("click", () => {
+    startScreen.appendChild(creditsScreen);
+})*/
 
 
 // Title screen "Start" button
 
 startScreen.addEventListener("click", () => {
-    let bgST = setInterval(() => {
-        stOST.play();
-    }, 10);
-
-})
+    setInterval(() => { stOST.play(); }, 1); });
 
 startButton.addEventListener("click", () => {
-
-
     heyListen.play(); // Plays the "Hey, Listen!" sound effect when the button is clicked.
 
     canvas.appendChild(healthBar);
@@ -149,9 +141,7 @@ startButton.addEventListener("click", () => {
     startScreen.style.display = "none"; // Shows the title screen.
     startButton.style.display = "none"; // Shows the "Start" button.
     healthBar.style.display = "inline-block";
-    setTimeout(() => {
 
-    }, 2000);
 
     
     startGame(); // Starts the game.
