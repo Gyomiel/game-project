@@ -22,7 +22,7 @@ class Character { // Creates the character.
         } else {
             this.health -= dmg;
         }
-        
+
     }
 
     linkAttacksEnemies(enemies) {
@@ -33,17 +33,26 @@ class Character { // Creates the character.
                 let enemyXRight = enemy.x + enemy.width;
                 let enemyY = enemy.y;
                 let enemyYBottom = enemy.y + enemy.height;
-        
+
                 let characterXRight = this.x + this.width;
                 let characterYBottom = this.y + this.height;
-        
-                if (this.x < enemyXRight && characterXRight > enemyX &&
-                    this.y < enemyYBottom && characterYBottom > enemyY) {
+
+                if (this.x < enemyXRight + 20 && characterXRight > enemyX - 20 &&
+                    this.y < enemyYBottom + 20 && characterYBottom > enemyY - 20) {
                         enemy.health -= this.strenght;
+                        if(enemy.health <= 0) {
+                            enemy.removeEnemy();
+                        }
                     }
         }
     }
  }
+
+     removeLink() {
+        let youDied = document.getElementById("dead");
+        canvas.appendChild(youDied);
+
+}
 
 
     insertCharacter() { // Inserts the character into the canvas.

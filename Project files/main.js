@@ -40,7 +40,7 @@ arrayObstacles.push(obstaclesFirstTreeColumn);
 let obstaclesSecondTreeColumn = new Obstacles(80, 1000, 920, 0);
 arrayObstacles.push(obstaclesSecondTreeColumn);
 
-// battle screen
+// Battle screen & Ganon
 
 let battleScreen = document.getElementById("battlescreen"); // Makes the id="battleScreen" into a variable named canvas.
 battleScreen.style.width = 1000 + "px"; // Setting dimensions
@@ -53,11 +53,13 @@ function accessBattle() {
         battleScreen.style.display = "block";
         canvas.style.display = "none"; 
         character.insertCharacterIntoBattleScreen();
+        ganon.insertGanon();
     }
 
-    
-
     }
+
+
+let ganon = new Ganon(500, 500);
 
 
 // Enemies array

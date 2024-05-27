@@ -67,7 +67,27 @@ body {
   position: relative;
   display: none;
   transition: opacity 20s ease-in-out;
+  
 }
+
+
+#dead {
+  display: none;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 260px;
+  left: 180px;
+}
+
+#ganon {
+  background-image: url(../sprites/ganonrosario.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  position: absolute;
+}
+
 
 #obs {
   position: absolute;

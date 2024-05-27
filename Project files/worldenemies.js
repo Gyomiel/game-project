@@ -10,6 +10,7 @@ class Enemy { // Creates the enemy.
         this.speed = 1;
         this.health = 60;
         this.strength = 30;
+        this.attacking = false;
         this.timerMove = setInterval(() => this.enemyMovement(), 10)
         this.directionRandom = 0
         this.timerDirection = setInterval(() => this.randomNumber(), 1000)//changes direction to emulate random movement
@@ -29,6 +30,32 @@ class Enemy { // Creates the enemy.
     randomNumber() { // Generates a random direction for the enemies.
         this.directionRandom = Math.floor(Math.random() * 4) + 1;
     }
+
+    enemiesAttackLink() {
+        this.attacking = true;
+        if (this.attacking && character.attacking) {
+            setInterval(() => {
+                let linkX = character.x;
+                let linkXRight = character.x + character.width;
+                let linkY = character.y;
+                let linkYBottom = character.y + character.height;
+
+                let enemyXRight = this.x + this.width;
+                let enemyYBottom = this.y + this.height;
+
+                if (this.x < linkXRight + 20 && enemyXRight > linkX - 20 &&
+                    this.y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
+                        character.health -= this.strength;
+                        if(character.health <= 0) {
+                            character.removeLink();
+                        }
+                    }
+            }, 2000);
+
+        }
+    }
+    
+
 
     enemyMovement() {//if there is a collision, the enemies keeps the previous direction
         let previousX = this.x;
@@ -79,12 +106,11 @@ class Enemy { // Creates the enemy.
     }
     
     removeEnemy() {
-        if (character.attacking === true) {
-            canvas.removeChild(this.sprite);
-            clearInterval(this.timerMove);
-            clearInterval(this.timerDirection);
-        }
-    }
+
+        canvas.removeChild(this.sprite);
+        clearInterval(this.timerMove);
+        clearInterval(this.timerDirection);
+}
 
     checkCollisions() {
         let enemyX = this.x;
