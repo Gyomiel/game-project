@@ -75,8 +75,7 @@ class Character { // Creates the character.
 
      removeLink() {
         alert("ded");
-
-}
+    }
 
 
     insertCharacter() { // Inserts the character into the canvas.
@@ -273,7 +272,7 @@ checkCollisionsWithObstaclesBattleScreen(obstacles) {
 collisionWithGanon() {
 
     //ganon attacks
-    let ganonCollision = false;
+    
     if (ganon) {
     
         
@@ -285,8 +284,14 @@ collisionWithGanon() {
        let characterXRight = this.x + this.width;
        let characterYBottom = this.y + this.height;
     
-       if (this.x < ganonXRight + 5 && characterXRight - 5 > ganonX &&
-           this.y + 5 < ganonYBottom && characterYBottom - 5 > ganonY) {
+       if (this.x < ganonXRight  && characterXRight  > ganonX &&
+           this.y  < ganonYBottom && characterYBottom  > ganonY) {
+
+            this.health -= ganon.strenght;
+            this.removeHearts()
+            if(this.health <= 0) {
+                this.removeLink()
+            }
                console.log("HAY COLISIÓN")
            if (characterXRight > ganonX && this.x <= ganonX) {
                this.x = ganonX - this.width;
@@ -304,8 +309,8 @@ collisionWithGanon() {
                console.log("d")
            }
     
-          ganonCollision = true;
           this.speed = 0;
+          return true;
        }
     }
 }
