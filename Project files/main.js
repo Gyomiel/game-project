@@ -158,11 +158,29 @@ startButton.addEventListener("click", () => {
 window.addEventListener("keydown", function (e) {
     let collisionDetected = false;
     for (let i = 0; i < enemyArray.length; i++) {
+        /* let linkX = character.x;
+        let linkXRight = character.x + character.width;
+        let linkY = character.y;
+        let linkYBottom = character.y + character.height;
+
+        let enemyXRight = enemyArray[i].x + enemyArray[i].width;
+        let enemyYBottom = enemyArray[i].y + enemyArray[i].height;
+
+        character.health -= enemyArray[i].strength;
+        
+        if (this.x < linkXRight + 20 && enemyXRight > linkX - 20 &&
+            this.y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
+                enemyArray[i].sprite.style.backgroundImage ="url('../sprites/linkieleft.gif')";
+                character.health -= this.strength;
+                if(character.health <= 0) {
+                    character.removeLink();
+                }
+        
         if (character.checkCollisionsWithEnemies(enemyArray)) {
             collisionDetected = true;
             break;
         }
-    }
+    } */
 
     if (!collisionDetected) {
         switch (e.key) {
@@ -198,7 +216,7 @@ window.addEventListener("keydown", function (e) {
                 break;
         }
     }
-});
+}});
 
 
 window.addEventListener("keyup", function (e) {

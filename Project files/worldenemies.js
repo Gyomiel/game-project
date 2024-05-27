@@ -32,6 +32,8 @@ class Enemy { // Creates the enemy.
     }
 
     enemiesAttackLink() {
+
+        this.sprite.style.backgroundImage ="url('../sprites/linkieleft.gif')";
         this.attacking = true;
         if (this.attacking && character.attacking) {
             setInterval(() => {
@@ -42,6 +44,8 @@ class Enemy { // Creates the enemy.
 
                 let enemyXRight = this.x + this.width;
                 let enemyYBottom = this.y + this.height;
+                
+                character.health -= this.strength;
 
                 if (this.x < linkXRight + 20 && enemyXRight > linkX - 20 &&
                     this.y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
