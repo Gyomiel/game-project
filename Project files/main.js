@@ -233,29 +233,26 @@ if (!collisionDetected || !ganonCollision) {
             character.speed = 10;
             character.characterMovementX();
             character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
-
             break;
         case "w":
             accessBattle();
             character.directionY = -1;
             character.speed = 10;
             character.characterMovementY();
-
             break;
         case "s":
             accessBattle();
             character.directionY = 1;
             character.speed = 10;
             character.characterMovementY();
-
             break;
         case "g":
             character.attacking = true;
             character.linkAttacksEnemies(enemyArray);
             character.linkAttacksGanon(ganon);
-
             break;
     }
+
 
 }
      
