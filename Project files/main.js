@@ -10,6 +10,8 @@ let stOST = document.getElementById("stOST"); // "The Hero of Rhyme" soundtrack 
 let timerMoveCharacterX; // Moving time interval on X axis.
 let timerMoveCharacterY; // Moving time interval on Y axis.
 let timerCreateEnemy;
+let healthBar = document.getElementById("healthbar");
+healthBar.style.display = "none";
 
 
 // Create obstacles
@@ -49,17 +51,20 @@ battleScreen.style.height = 1000 + "px";
 
 function accessBattle() {
     if (character.x > 333 && character.x < 500 && character.y < 30) {
-       
+        character.x = 730;
+        character.y = 880;
         battleScreen.style.display = "block";
         canvas.style.display = "none"; 
         character.insertCharacterIntoBattleScreen();
         ganon.insertGanon();
-    }
+        battleScreen.appendChild(healthBar);
 
     }
 
+    }
 
-let ganon = new Ganon(500, 500);
+
+let ganon = new Ganon(400, 200);
 
 
 // Enemies array
@@ -80,16 +85,6 @@ function createEnemy() {
 
 
 // Character
-
-let healthHeart1 = document.createElement("div");
-healthHeart1.setAttribute("id", "heart1");
-
-let healthHeart2 = document.createElement("div");
-healthHeart2.setAttribute("id", "heart2");
-
-let healthHeart3 = document.createElement("div");
-healthHeart3.setAttribute("id", "heart3");
-
 
 let widthInt = canvas.style.width.slice(0, 4);
 let heightInt = canvas.style.width.slice(0, 4);
@@ -123,6 +118,8 @@ function startGame() { // Starts the game.
     setTimeout(() => {
         character.receiveDamage();
     }, 3000);
+
+    
 }
 
 
@@ -140,13 +137,19 @@ startButton.addEventListener("click", () => {
 
     heyListen.play(); // Plays the "Hey, Listen!" sound effect when the button is clicked.
 
+    canvas.appendChild(healthBar);
+    
+    canvas.style.display = "block"; // Hides the canvas while the title screen is on.
+    startScreen.style.display = "none"; // Shows the title screen.
+    startButton.style.display = "none"; // Shows the "Start" button.
+    healthBar.style.display = "inline-block";
     setTimeout(() => {
-        canvas.style.display = "block"; // Hides the canvas while the title screen is on.
-        startScreen.style.display = "none"; // Shows the title screen.
-        startButton.style.display = "none"; // Shows the "Start" button.
+
     }, 2000);
 
+    
     startGame(); // Starts the game.
+    
 });
 
 
@@ -155,11 +158,29 @@ startButton.addEventListener("click", () => {
 window.addEventListener("keydown", function (e) {
     let collisionDetected = false;
     for (let i = 0; i < enemyArray.length; i++) {
+        /* let linkX = character.x;
+        let linkXRight = character.x + character.width;
+        let linkY = character.y;
+        let linkYBottom = character.y + character.height;
+
+        let enemyXRight = enemyArray[i].x + enemyArray[i].width;
+        let enemyYBottom = enemyArray[i].y + enemyArray[i].height;
+
+        character.health -= enemyArray[i].strength;
+        
+        if (this.x < linkXRight + 20 && enemyXRight > linkX - 20 &&
+            this.y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
+                enemyArray[i].sprite.style.backgroundImage ="url('../sprites/linkieleft.gif')";
+                character.health -= this.strength;
+                if(character.health <= 0) {
+                    character.removeLink();
+                }
+        
         if (character.checkCollisionsWithEnemies(enemyArray)) {
             collisionDetected = true;
             break;
         }
-    }
+    } */
 
     if (!collisionDetected) {
         switch (e.key) {
@@ -195,7 +216,7 @@ window.addEventListener("keydown", function (e) {
                 break;
         }
     }
-});
+}});
 
 
 window.addEventListener("keyup", function (e) {
