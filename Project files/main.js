@@ -103,15 +103,17 @@ function accessBattle() {
     }
 
 // Enemies array
+let counterEnemies = 0;
 
 function createEnemy() {
-    if (enemyArray.length <= 2) {
+    if (enemyArray.length <= 2 && counterEnemies <= 3) {
         
     let randomLocationY = Math.floor(Math.random() * ((1000 - 75 - 120) - 250 ) + 300);
 
     let randomLocationX = Math.floor(Math.random() * ((1000 - 75 - 120) - 400) + 400)
 
     let enemy = new Enemy(randomLocationX, randomLocationY);
+    counterEnemies++;
 
     enemy.insertEnemy();
     enemyArray.push(enemy); }};
