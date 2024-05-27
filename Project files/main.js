@@ -5,7 +5,7 @@ canvas.style.width = 1000 + "px";
 canvas.style.height = 1000 + "px";
 let startButton = document.getElementsByClassName("startbtn")[0]; // Button that starts the game from the title screen.
 let startScreen = document.getElementById("startScreen"); // Makes the id="startScreen" into a variable named startScreen.
-let creditsButton = document.getElementsByClassName("creditsbtn");
+let creditsButton = document.getElementsByClassName("creditsbtn")[0];
 let creditsScreen = document.getElementById("creditsScreen");
 let heyListen = document.getElementById("heyListen"); // "Hey, listen!" sound effect for the button.
 let bgOST = document.getElementById("bgOST"); 
@@ -151,11 +151,14 @@ function startGame() { // Starts the game.
  
 };
 
-/*// Credits button
-
+/// Credits button
 creditsButton.addEventListener("click", () => {
     startScreen.appendChild(creditsScreen);
-})*/
+    startScreen.style.display = "none";
+    creditsScreen.style.display = "block";
+    startButton.style.display = "none"
+    creditsButton.style.display = "none";
+})
 
 
 // Title screen "Start" button
