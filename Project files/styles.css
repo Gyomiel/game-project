@@ -83,6 +83,15 @@ body {
   position: absolute;
   display: none;
 }
+.backtostartfromcredits {
+  display: none;
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  top: 50%;
+  left: 49%;
+  
+}
 
 
 #dead {

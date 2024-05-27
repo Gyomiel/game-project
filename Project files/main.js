@@ -7,6 +7,7 @@ let startButton = document.getElementsByClassName("startbtn")[0]; // Button that
 let startScreen = document.getElementById("startScreen"); // Makes the id="startScreen" into a variable named startScreen.
 let creditsButton = document.getElementsByClassName("creditsbtn")[0];
 let creditsScreen = document.getElementById("creditsScreen");
+let backtostartfromcredits = document.getElementsByClassName("backtostartfromcredits")[0];
 let heyListen = document.getElementById("heyListen"); // "Hey, listen!" sound effect for the button.
 let bgOST = document.getElementById("bgOST"); 
 let stOST = document.getElementById("stOST"); // "Let's fighting love" soundtrack for the title screen.
@@ -153,13 +154,27 @@ function startGame() { // Starts the game.
 
 /// Credits button
 creditsButton.addEventListener("click", () => {
-    startScreen.appendChild(creditsScreen);
     startScreen.style.display = "none";
     creditsScreen.style.display = "block";
-    startButton.style.display = "none"
+    startButton.style.display = "none";
     creditsButton.style.display = "none";
-})
 
+    creditsScreen.style.position = "relative";
+
+    backtostartfromcredits.style.display = "inline-block";
+});
+
+//back to start
+
+backtostartfromcredits.addEventListener("click", () => {
+    startScreen.style.display = "block";
+    creditsScreen.style.display = "none";
+    startButton.style.display = "inline-block";
+    creditsButton.style.display = "inline-block";
+    backtostartfromcredits.style.display = "none";
+    
+   
+});
 
 // Title screen "Start" button
 
