@@ -16,12 +16,34 @@ class Character { // Creates the character.
         this.jump = false;
     }
 
-    receiveDamage() {
+    receiveDamage(dmg) {
         if (this.health <= 0) {
             alert("YOU DIED");
+        } else {
+            this.health -= dmg;
         }
         
     }
+
+    linkAttacksEnemies(enemies) {
+        this.attacking = true;
+        if (this.attacking) {
+            for (let enemy of enemies) {
+                let enemyX = enemy.x;
+                let enemyXRight = enemy.x + enemy.width;
+                let enemyY = enemy.y;
+                let enemyYBottom = enemy.y + enemy.height;
+        
+                let characterXRight = this.x + this.width;
+                let characterYBottom = this.y + this.height;
+        
+                if (this.x < enemyXRight && characterXRight > enemyX &&
+                    this.y < enemyYBottom && characterYBottom > enemyY) {
+                        enemy.health -= this.strenght;
+                    }
+        }
+    }
+ }
 
 
     insertCharacter() { // Inserts the character into the canvas.
@@ -31,7 +53,20 @@ class Character { // Creates the character.
         this.sprite.style.width = this.width + "px";
         this.sprite.style.height = this.height + "px";
         canvas.appendChild(this.sprite);
+   
     }
+
+
+    insertCharacterIntoBattleScreen() {
+        this.sprite.setAttribute("id", "character");
+        this.sprite.style.top = this.y + "px";
+        this.sprite.style.left = this.x + "px";
+        this.sprite.style.width = this.width + "px";
+        this.sprite.style.height = this.height + "px";
+        battleScreen.appendChild(this.sprite);
+    }
+
+
 
     characterMovementX() { // Moves the character in its X axis (left and right).
         let previousX = this.x;
@@ -64,6 +99,7 @@ class Character { // Creates the character.
     }
 
     //we check collisions in the character perspective and in the enemy's
+
  checkCollisionsWithEnemies(enemies) {
     for (let enemy of enemies) {
         let enemyX = enemy.x;
