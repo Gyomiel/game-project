@@ -29,7 +29,12 @@ class Ganon {
 
     linkAttacksGanon() {
         this.attacking = true;
-        
+
+    }
+    removeGanon() {
+        if (this.health <= 0) {
+            battleScreen.removeChild(this.sprite);
+        }
     }
 }
 

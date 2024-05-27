@@ -13,7 +13,7 @@ let timerCreateEnemy;
 let healthBar = document.getElementById("healthbar");
 healthBar.style.display = "none";
 
-
+let enemyArray = [];
 // Create obstacles
 
 let arrayObstacles = [];
@@ -48,9 +48,16 @@ let battleScreen = document.getElementById("battlescreen"); // Makes the id="bat
 battleScreen.style.width = 1000 + "px"; // Setting dimensions
 battleScreen.style.height = 1000 + "px";
  
-
+let ganon
 function accessBattle() {
+    ganon = new Ganon(400, 200);
+    character.final = true
     if (character.x > 333 && character.x < 500 && character.y < 30) {
+        arrayObstacles = []
+        clearInterval(timerCreateEnemy)
+        for (let i = 0; i<= enemyArray.length; i++) {
+            enemyArray[i].removeEnemy();
+        }
         character.x = 730;
         character.y = 880;
         battleScreen.style.display = "block";
@@ -64,11 +71,10 @@ function accessBattle() {
     }
 
 
-let ganon = new Ganon(400, 200);
+
 
 
 // Enemies array
-let enemyArray = [];
 
 function createEnemy() {
     if (enemyArray.length <= 2) {
@@ -167,14 +173,19 @@ window.addEventListener("keydown", function (e) {
         let enemyYBottom = enemyArray[i].y + enemyArray[i].height;
 
         // Reducir la salud del personaje principal solo una vez por enemigo
-        
 
         // Verificar colisión
-        if (enemyArray[i].x < linkXRight + 20 && enemyXRight > linkX - 20 &&
-            enemyArray[i].y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
+        if (enemyArray[i].x < linkXRight + 5 && enemyXRight > linkX - 5 &&
+            enemyArray[i].y < linkYBottom + 5 && enemyYBottom > linkY - 5) {
+                
                 character.health -= enemyArray[i].strength;
-                console.log("Auch")
-            character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
+                character.removeHearts()
+                if(character.directionX === 1) {
+                    character.sprite.style.backgroundImage = "url('../sprites/linkierightdmg.gif')";
+                } else if (character.directionX === -1){
+
+                    character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
+                }
             if (character.health <= 0) {
                 character.removeLink();
             }
@@ -182,42 +193,93 @@ window.addEventListener("keydown", function (e) {
             break;
         }
     
+}
 
-    if (!collisionDetected) {
-        switch (e.key) {
-            case "a":
-                accessBattle();
-                character.directionX = -1;
-                character.speed = 10;
-                character.characterMovementX();
-                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
-                break;
-            case "d":
-                accessBattle();
-                character.directionX = 1;
-                character.speed = 10;
-                character.characterMovementX();
-                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
-                break;
-            case "w":
-                accessBattle();
-                character.directionY = -1;
-                character.speed = 10;
-                character.characterMovementY();
-                break;
-            case "s":
-                accessBattle();
-                character.directionY = 1;
-                character.speed = 10;
-                character.characterMovementY();
-                break;
-            case "g":
-                character.attacking = true;
-                character.linkAttacksEnemies(enemyArray);
-                break;
+
+     //ganon attacks
+     let ganonCollision = false;
+     if (ganon) {
+
+         
+        let ganonX = ganon.x;
+        let ganonXRight = ganon.x + ganon.width;
+        let ganonY = ganon.y;
+        let ganonYBottom = ganon.y + ganon.height;
+
+        let characterXRight = character.x + character.width;
+        let characterYBottom = character.y + character.height;
+
+        if (character.x < ganonXRight && characterXRight > ganonX &&
+            character.y < ganonYBottom && characterYBottom > ganonY) {
+                console.log("HAY COLISIÓN")
+            if (characterXRight > ganonX && character.x <= ganonX) {
+                character.x = ganonX - character.width;
+                console.log("a")
+            } else if (character.x < ganonXRight && characterXRight >= ganonXRight) {
+                character.x = ganonXRight;
+                console.log("b")
+            }
+
+            if (characterYBottom > ganonY && character.y <= ganonY) {
+                character.y = ganonY - character.height;
+                console.log("c")
+            } else if (character.y < ganonYBottom && characterYBottom >= ganonYBottom) {
+                character.y = ganonYBottom;
+                console.log("d")
+            }
+
+           ganonCollision = true;
+           character.speed = 0;
         }
     }
-}});
+
+    
+   
+
+     
+if (!collisionDetected || !ganonCollision) {
+    switch (e.key) {
+        case "a":
+            accessBattle();
+            character.directionX = -1;
+            character.speed = 10;
+            character.characterMovementX();
+            character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
+          
+            break;
+        case "d":
+            accessBattle();
+            character.directionX = 1;
+            character.speed = 10;
+            character.characterMovementX();
+            character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
+
+            break;
+        case "w":
+            accessBattle();
+            character.directionY = -1;
+            character.speed = 10;
+            character.characterMovementY();
+
+            break;
+        case "s":
+            accessBattle();
+            character.directionY = 1;
+            character.speed = 10;
+            character.characterMovementY();
+
+            break;
+        case "g":
+            character.attacking = true;
+            character.linkAttacksEnemies(enemyArray);
+            character.linkAttacksGanon(ganon);
+
+            break;
+    }
+
+}
+     
+});
 
 
 window.addEventListener("keyup", function (e) {

@@ -70,7 +70,6 @@ class Enemy { // Creates the enemy.
         let marginLeft = 95; 
         let marginBottomAndTop = 95;
         
-
         if (this.directionRandom === 1) {
             let enemyMoveX = this.x + this.speed * 1;
             if (enemyMoveX <= 1000 - marginRight && enemyMoveX >= marginLeft ) {
@@ -109,11 +108,13 @@ class Enemy { // Creates the enemy.
     }
     
     removeEnemy() {
-
+        let a = enemyArray.indexOf(this)
+        enemyArray.splice(a, 1)
         canvas.removeChild(this.sprite);
         clearInterval(this.timerMove);
         clearInterval(this.timerDirection);
-}
+        console.log(enemyArray)
+    }
 
     checkCollisions() {
         let enemyX = this.x;
@@ -130,9 +131,11 @@ class Enemy { // Creates the enemy.
     
         if (enemyX < characterXRight && enemyXRight > characterX &&
             enemyY < characterYBottom && enemyYBottom > characterY) {
-    
+
+  
             if (enemyXRight > characterX && enemyX <= characterX) {
                 this.x = characterX - this.width;
+            
             } else if (enemyX < characterXRight && enemyXRight >= characterXRight) {
                 this.x = characterXRight;
             }

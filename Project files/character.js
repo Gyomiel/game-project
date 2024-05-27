@@ -14,6 +14,7 @@ class Character { // Creates the character.
         this.strenght = 30;
         this.attacking = false;
         this.jump = false;
+        this.final = false
     }
 
     /*receiveDamage(dmg) {
@@ -24,6 +25,14 @@ class Character { // Creates the character.
         }
 
     }*/
+
+    removeHearts() {
+        let healthBar = document.getElementById("healthbar");
+
+        if (this.health === 60 || this.health === 30) {
+            healthBar.lastElementChild.remove();
+        }
+    }
 
     linkAttacksEnemies(enemies) {
         this.attacking = true;
@@ -47,6 +56,21 @@ class Character { // Creates the character.
         }
     }
  }
+
+        linkAttacksGanon(boss) {
+            if(this.final){
+                this.attacking = true;
+                console.log(boss.health)
+    
+                boss.health = boss.health - this.strenght;
+                console.log(boss.health)
+                if(boss.health <= 0) {
+                    boss.removeGanon();
+                }
+            }
+
+
+        }
 
      removeLink() {
         alert("ded");
@@ -208,4 +232,66 @@ jumpFence() {
     }
     
 }
+
+//collision with ganon
+
+checkCollisionsWithGanon() {
+    
+        let ganonX = ganon.x;
+        let ganonXRight = ganon.x + ganon.width;
+        let ganonY = ganon.y;
+        let ganonYBottom = ganon.y + ganon.height;
+
+        let characterXRight = this.x + this.width;
+        let characterYBottom = this.y + this.height;
+
+        if (this.x < ganonXRight && characterXRight > ganonX &&
+            this.y < ganonYBottom && characterYBottom > ganonY) {
+
+            if (characterXRight > ganonX && this.x <= ganonX) {
+                this.x = ganonX - this.width;
+            } else if (this.x < ganonXRight && characterXRight >= ganonXRight) {
+                this.x =enemies
+            this.speed = 0;//to prevent overlapping from keydown action
+            return true;
+        }
+    }
+
+    this.speed = 8;
+    return false;
+
 }
+}
+
+
+/* let ganonX = ganon.x;
+        let ganonXRight = ganon.x + ganon.width;
+        let ganonY = ganon.y;
+        let ganonYBottom = ganon.y + ganon.height;
+
+        let characterXRight = character.x + character.width;
+        let characterYBottom = character.y + character.height;
+
+        if (character.x < ganonXRight && characterXRight > ganonX &&
+            character.y < ganonYBottom && characterYBottom > ganonY) {
+
+            if (characterXRight > ganonX && character.x <= ganonX) {
+                character.x = ganonX - character.width;
+            } else if (character.x < ganonXRight && characterXRight >= ganonXRight) {
+                character.x = ganonXRight;
+            }
+
+            if (characterYBottom > ganonY && character.y <= ganonY) {
+                character.y = ganonY - character.height;
+            } else if (character.y < ganonYBottom && characterYBottom >= ganonYBottom) {
+                character.y = ganonYBottom;
+            }
+
+            character.speed = 0;//to prevent overlapping from keydown action
+            return true;
+        }
+    }
+
+    character.speed = 8;
+    return false;
+} */
