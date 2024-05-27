@@ -9,7 +9,7 @@ class Enemy { // Creates the enemy.
         this.sprite = document.createElement("div");
         this.speed = 1;
         this.health = 60;
-        this.strength = 30;
+        this.strength = 5;
         this.attacking = false;
         this.timerMove = setInterval(() => this.enemyMovement(), 10)
         this.directionRandom = 0
@@ -31,9 +31,8 @@ class Enemy { // Creates the enemy.
         this.directionRandom = Math.floor(Math.random() * 4) + 1;
     }
 
-    enemiesAttackLink() {
+  /*   enemiesAttackLink() {
 
-        this.attacking = true;
         if (this.attacking && character.attacking) {
             setInterval(() => {
                 let linkX = character.x;
@@ -45,9 +44,12 @@ class Enemy { // Creates the enemy.
                 let enemyYBottom = this.y + this.height;
                 
                 character.health -= this.strength;
+                
+                this.sprite.classList.add('hit');
 
-                if (this.x < linkXRight + 20 && enemyXRight > linkX - 20 &&
-                    this.y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
+                
+                if (this.x < linkXRight + 2 && enemyXRight > linkX - 2 &&
+                    this.y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
                         character.health -= this.strength;
                         if(character.health <= 0) {
                             character.removeLink();
@@ -57,7 +59,7 @@ class Enemy { // Creates the enemy.
 
         }
     }
-    
+     */
 
 
     enemyMovement() {//if there is a collision, the enemies keeps the previous direction

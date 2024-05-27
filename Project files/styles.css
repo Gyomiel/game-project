@@ -93,13 +93,35 @@ body {
   top: 260px;
   left: 180px;
 }
-
 #ganon {
   background-image: url(../sprites/ganonrosario.gif);
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
   position: absolute;
+  border-radius: 50%;
+  animation: explode 4s infinite, sparks 2s infinite; /* Cambié la duración a 2s y establecí la repetición infinita */
+}
+
+@keyframes explode {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+
+@keyframes sparks {
+  0% {
+    box-shadow: 0 0 10px #FFF, 0 0 20px #FFF, 0 0 30px #FFF, 0 0 40px #FFF, 0 0 50px #FFF, 0 0 60px #FFF, 0 0 70px #FFF, 0 0 80px #FFF, 0 0 90px #FFF, 0 0 100px #FFF, 0 0 110px #FFF;
+  }
+  100% {
+    box-shadow: 0 0 10px #FFF, 0 0 20px #FFF, 0 0 30px #FFF, 0 0 40px #FFF, 0 0 50px #FFF, 0 0 60px #FFF, 0 0 70px #FFF, 0 0 80px #FFF, 0 0 90px #FFF, 0 0 100px #FFF, 0 0 110px transparent;
+  }
 }
 
 
@@ -189,3 +211,26 @@ audio {
     transform: translateY(0) scale(1);
   }
 }
+
+#enemy.hit {
+  animation: attackAnimation 1s ease forwards infinite; 
+ 
+} 
+
+ @keyframes attackAnimation {
+  0% {
+      transform: scale(1);
+      box-shadow: none; 
+  }
+  50% {
+      transform: scale(0.8);
+      box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.7);
+      border-radius: 50%;
+  }
+  100% {
+      transform: scale(0.8);
+      box-shadow: none;
+      border-radius: 50%;
+  }
+} 
+

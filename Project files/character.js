@@ -27,7 +27,7 @@ class Character { // Creates the character.
     }
 
     linkAttacksEnemies(enemies) {
-        this.attacking = true;
+    
         if (this.attacking) {
             for (let enemy of enemies) {
                 let enemyX = enemy.x;
@@ -47,6 +47,7 @@ class Character { // Creates the character.
                     }
         }
     }
+    this.attacking = false;
  }
 
         linkAttacksGanon(boss) {
@@ -66,8 +67,7 @@ class Character { // Creates the character.
 
      removeLink() {
         alert("ded");
-
-}
+    }
 
 
     insertCharacter() { // Inserts the character into the canvas.
@@ -100,7 +100,7 @@ class Character { // Creates the character.
             this.x = moveX;
         }
 
-        if (this.checkCollisionsWithEnemies(enemyArray) || this.checkCollisionsWithObstacles(arrayObstacles)) {
+        if (this.checkCollisionsWithEnemies(enemyArray) || this.checkCollisionsWithObstacles(arrayObstacles) || this.collisionWithGanon() || this.collisionWithGanon() || this.checkCollisionsWithObstaclesBattleScreen(arrayObstaclesBattleScreen)) {
             this.x = previousX;
         }
 
@@ -114,8 +114,9 @@ class Character { // Creates the character.
         if (moveY <= 1000 - this.height && moveY >= 0) {
             this.y = moveY;
         }
+        
 
-        if (this.checkCollisionsWithEnemies(enemyArray)  || this.checkCollisionsWithObstacles(arrayObstacles)) {
+        if (this.checkCollisionsWithEnemies(enemyArray)  || this.checkCollisionsWithObstacles(arrayObstacles) || this.collisionWithGanon() || this.checkCollisionsWithObstaclesBattleScreen(arrayObstaclesBattleScreen)) {
             this.y = previousY;
         }
 
@@ -225,65 +226,85 @@ jumpFence() {
     
 }
 
-//collision with ganon
-
-checkCollisionsWithGanon() {
+checkCollisionsWithObstaclesBattleScreen(obstacles) {
     
-        let ganonX = ganon.x;
-        let ganonXRight = ganon.x + ganon.width;
-        let ganonY = ganon.y;
-        let ganonYBottom = ganon.y + ganon.height;
+    for (let obstacle of obstacles) {
+        let obstacleX = obstacle.x;
+        let obstacleXRight = obstacle.x + obstacle.width;
+        let obstacleY = obstacle.y;
+        let obstacleYBottom = obstacle.y + obstacle.height;
 
         let characterXRight = this.x + this.width;
         let characterYBottom = this.y + this.height;
 
-        if (this.x < ganonXRight && characterXRight > ganonX &&
-            this.y < ganonYBottom && characterYBottom > ganonY) {
+        if (this.x < obstacleXRight && characterXRight > obstacleX &&
+            this.y < obstacleYBottom && characterYBottom > obstacleY) {
 
-            if (characterXRight > ganonX && this.x <= ganonX) {
-                this.x = ganonX - this.width;
-            } else if (this.x < ganonXRight && characterXRight >= ganonXRight) {
-                this.x =enemies
+
+            if (characterXRight > obstacleX && this.x <= obstacleX) {
+                this.x = obstacleX - this.width;
+            } else if (this.x < obstacleXRight && characterXRight >= obstacleXRight) {
+                this.x = obstacleXRight;
+            }
+
+            if (characterYBottom > obstacleY && this.y <= obstacleY) {
+                this.y = obstacleY - this.height;
+            } else if (this.y < obstacleYBottom && characterYBottom >= obstacleYBottom) {
+                this.y = obstacleYBottom;
+            }
+
             this.speed = 0;//to prevent overlapping from keydown action
             return true;
         }
-    }
-
-    this.speed = 8;
-    return false;
-
-}
+    } 
 }
 
+//ganon collision
 
-/* let ganonX = ganon.x;
-        let ganonXRight = ganon.x + ganon.width;
-        let ganonY = ganon.y;
-        let ganonYBottom = ganon.y + ganon.height;
+collisionWithGanon() {
 
-        let characterXRight = character.x + character.width;
-        let characterYBottom = character.y + character.height;
+    //ganon attacks
+    
+    if (ganon) {
+    
+        
+       let ganonX = ganon.x;
+       let ganonXRight = ganon.x + ganon.width;
+       let ganonY = ganon.y;
+       let ganonYBottom = ganon.y + ganon.height;
+    
+       let characterXRight = this.x + this.width;
+       let characterYBottom = this.y + this.height;
+    
+       if (this.x < ganonXRight  && characterXRight  > ganonX &&
+           this.y  < ganonYBottom && characterYBottom  > ganonY) {
 
-        if (character.x < ganonXRight && characterXRight > ganonX &&
-            character.y < ganonYBottom && characterYBottom > ganonY) {
-
-            if (characterXRight > ganonX && character.x <= ganonX) {
-                character.x = ganonX - character.width;
-            } else if (character.x < ganonXRight && characterXRight >= ganonXRight) {
-                character.x = ganonXRight;
+            this.health -= ganon.strenght;
+            this.removeHearts()
+            if(this.health <= 0) {
+                this.removeLink()
             }
-
-            if (characterYBottom > ganonY && character.y <= ganonY) {
-                character.y = ganonY - character.height;
-            } else if (character.y < ganonYBottom && characterYBottom >= ganonYBottom) {
-                character.y = ganonYBottom;
-            }
-
-            character.speed = 0;//to prevent overlapping from keydown action
-            return true;
-        }
+               console.log("HAY COLISIÓN")
+           if (characterXRight > ganonX && this.x <= ganonX) {
+               this.x = ganonX - this.width;
+               console.log("a")
+           } else if (this.x < ganonXRight && characterXRight >= ganonXRight) {
+               this.x = ganonXRight;
+               console.log("b")
+           }
+    
+           if (characterYBottom > ganonY && this.y <= ganonY) {
+               this.y = ganonY - this.height;
+               console.log("c")
+           } else if (this.y < ganonYBottom && characterYBottom >= ganonYBottom) {
+               this.y = ganonYBottom;
+               console.log("d")
+           }
+    
+          this.speed = 0;
+          return true;
+       }
     }
+}
 
-    character.speed = 8;
-    return false;
-} */
+}
