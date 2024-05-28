@@ -31,36 +31,6 @@ class Enemy { // Creates the enemy.
         this.directionRandom = Math.floor(Math.random() * 4) + 1;
     }
 
-  /*   enemiesAttackLink() {
-
-        if (this.attacking && character.attacking) {
-            setInterval(() => {
-                let linkX = character.x;
-                let linkXRight = character.x + character.width;
-                let linkY = character.y;
-                let linkYBottom = character.y + character.height;
-
-                let enemyXRight = this.x + this.width;
-                let enemyYBottom = this.y + this.height;
-                
-                character.health -= this.strength;
-                
-                this.sprite.classList.add('hit');
-
-                
-                if (this.x < linkXRight + 2 && enemyXRight > linkX - 2 &&
-                    this.y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
-                        character.health -= this.strength;
-                        if(character.health <= 0) {
-                            character.removeLink();
-                        }
-                    }
-            }, 2000);
-
-        }
-    }
-     */
-
 
     enemyMovement() {//if there is a collision, the enemies keeps the previous direction
         let previousX = this.x;
@@ -68,7 +38,7 @@ class Enemy { // Creates the enemy.
     
         //margin
 
-        let marginRight = this.width + 95;//95 px por árboles
+        let marginRight = this.width + 95;
         let marginLeft = 95; 
         let marginBottomAndTop = 95;
         

@@ -12,6 +12,9 @@ let heyListen = document.getElementById("heyListen"); // "Hey, listen!" sound ef
 let bgOST = document.getElementById("bgOST"); 
 let stOST = document.getElementById("stOST"); // "Let's fighting love" soundtrack for the title screen.
 let ganonOST = document.getElementById("ganonOST") // "Dale, Zelda, dale" soundtrack for the battle with Ganon.
+let linkOuch = document.getElementById("linkDamage");
+let enemyOuch = document.getElementById("enemyDamage");
+let ganonOuch = document.getElementById("ganonDamage");
 let timerMoveCharacterX; // Moving time interval on X axis.
 let timerMoveCharacterY; // Moving time interval on Y axis.
 let timerCreateEnemy;
@@ -59,21 +62,21 @@ let ganon;
 let arrayObstaclesBattleScreen = [];;
 
 function accessBattle() {
-
+    
     character.final = true
     if (character.x > 333 && character.x < 500 && character.y < 30) {
         ganon = new Ganon(400, 200);
         arrayObstacles = []
         clearInterval(timerCreateEnemy)
-        /* for (let i = 0; i<= enemyArray.length; i++) {
-            enemyArray[i].removeEnemy();
-        } */
         enemyArray = []
         character.x = 730;
         character.y = 880;
         battleScreen.style.display = "block";
         canvas.style.display = "none"; 
         character.insertCharacterIntoBattleScreen();
+        bgOST.pause();
+        ganonOST.volume = 0.5;
+        ganonOST.play();
         ganon.insertGanon();
         battleScreen.appendChild(healthBar);
         
@@ -178,20 +181,14 @@ backtostartfromcredits.addEventListener("click", () => {
 
 // Title screen "Start" button
 
-startScreen.addEventListener("click", () => {
-    setInterval(() => { stOST.play(); }, 1); });
-
-canvas.addEventListener("click", () => {
-    stOST.pause();
-    setInterval(() => { bgOST.play(); }, 1); });
-
-battleScreen.addEventListener("click", () => {
-    bgOST.pause();
-    setInterval(() => { ganonOST.play(); }, 1); });
-
 
 startButton.addEventListener("click", () => {
     heyListen.play(); // Plays the "Hey, Listen!" sound effect when the button is clicked.
+    stOST.pause();
+    setTimeout(() => {
+        bgOST.volume = 0.7;
+        bgOST.play();
+    }, 1500);
 
     canvas.appendChild(healthBar);
     
@@ -225,6 +222,8 @@ window.addEventListener("keydown", function (e) {
             enemyArray[i].y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
                 
                 enemyArray[i].sprite.classList.add('hit');
+                linkOuch.volume = 1;
+                linkOuch.play();
                 character.health -= enemyArray[i].strength;
                 character.removeHearts()
                 if(character.directionX === 1) {
@@ -234,9 +233,9 @@ window.addEventListener("keydown", function (e) {
                     character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
                 }
                 if (character.health <= 0) {
+                    gameOver.play();
                     alert("GAME OVER");
                     setTimeout(() => {
-                        //hard reload
                         location.href = location.href.split('?')[0] + '?cacheBuster=' + new Date().getTime();
                     }, 1000);
                 }
