@@ -282,7 +282,7 @@ if (!collisionDetected || !ganonCollision) {
         case "g":
             character.attacking = true;
             character.linkAttacksEnemies(enemyArray);
-            character.linkAttacksGanon(ganon);
+            if(ganon) character.linkAttacksGanon(ganon);
             break;
     }
 
