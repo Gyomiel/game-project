@@ -1,5 +1,4 @@
  // Necessary variables
-
 let canvas = document.getElementById("screen"); // Makes the id="screen" into a variable named canvas.
 canvas.style.width = 1000 + "px";
 canvas.style.height = 1000 + "px";
@@ -250,7 +249,8 @@ window.addEventListener("keydown", function (e) {
 }
 
 character.collisionWithGanon();
-
+let linkieLeft =  "url('../sprites/Linkieleft.gif')"
+let linkeRight = "url('../sprites/Linkieright.gif')"
 if (!collisionDetected || !ganonCollision) {
     switch (e.key) {
         case "a":
@@ -258,7 +258,8 @@ if (!collisionDetected || !ganonCollision) {
             character.directionX = -1;
             character.speed = 10;
             character.characterMovementX();
-            character.sprite.style.backgroundImage = "url('../sprites/Linkieleft.gif')";
+            
+            character.sprite.style.backgroundImage = linkieLeft;
           
             break;
         case "d":
@@ -266,7 +267,7 @@ if (!collisionDetected || !ganonCollision) {
             character.directionX = 1;
             character.speed = 10;
             character.characterMovementX();
-            character.sprite.style.backgroundImage = "url('../sprites/Linkieright.gif')";
+            character.sprite.style.backgroundImage = linkeRight;
             break;
         case "w":
             accessBattle();
