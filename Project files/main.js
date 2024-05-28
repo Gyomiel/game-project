@@ -65,17 +65,18 @@ function accessBattle() {
         ganon = new Ganon(400, 200);
         arrayObstacles = []
         clearInterval(timerCreateEnemy)
-        for (let i = 0; i<= enemyArray.length; i++) {
+        /* for (let i = 0; i<= enemyArray.length; i++) {
             enemyArray[i].removeEnemy();
-        }
+        } */
+        enemyArray = []
         character.x = 730;
         character.y = 880;
         battleScreen.style.display = "block";
         canvas.style.display = "none"; 
-        
         character.insertCharacterIntoBattleScreen();
         ganon.insertGanon();
         battleScreen.appendChild(healthBar);
+        
 
         //obstacles battlescreen
 
@@ -227,8 +228,9 @@ window.addEventListener("keydown", function (e) {
                 if (character.health <= 0) {
                     alert("GAME OVER");
                     setTimeout(() => {
-                        location.reload();
-                    }, 2000);
+                        //hard reload
+                        location.href = location.href.split('?')[0] + '?cacheBuster=' + new Date().getTime();
+                    }, 1000);
                 }
             
            
