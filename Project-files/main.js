@@ -20,6 +20,7 @@ let timerCreateEnemy;
 let healthBar = document.getElementById("healthbar");
 healthBar.style.display = "none";
 let heart = document.getElementsByClassName("heart")[0];
+let sword = document.getElementById("sword")
 
 let enemyArray = [];
 
@@ -128,6 +129,7 @@ function createEnemy() {
 let widthInt = canvas.style.width.slice(0, 4);
 let heightInt = canvas.style.width.slice(0, 4);
 let character = new Character(475, 500); // Sets the character into the canvas.
+character.sprite.appendChild(sword)
 
 
 // Starting the game
@@ -219,18 +221,23 @@ window.addEventListener("keydown", function (e) {
       
         if (enemyArray[i].x < linkXRight + 2 && enemyXRight > linkX - 2 &&
             enemyArray[i].y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
-                
+
+                if(character.directionX === 1 || (character.directionX === 1 && character.directionY 
+                    === 1)|| (character.directionX === 1 && character.directionY 
+                    === -1) || character.directionX === 0 || character.directionY === 0) {
+                    character.sprite.style.backgroundImage = "url('./sprites/Linkierightdmg.gif')";
+                } else if (character.directionX === -1|| (character.directionX === -1 && character.directionY 
+                    === -1) || (character.directionX === -1 && character.directionY 
+                        === 1 || character.directionX === 0 || character.directionY === 0)){
+
+                    character.sprite.style.backgroundImage = "url('./sprites/Linkieleftdmg.gif')";
+                } 
                 enemyArray[i].sprite.classList.add('hit');
                 linkOuch.volume = 1;
                 linkOuch.play();
                 character.health -= enemyArray[i].strength;
                 character.removeHearts()
-                if(character.directionX === 1) {
-                    character.sprite.style.backgroundImage = "url('../sprites/Linkierightdmg.gif')";
-                } else if (character.directionX === -1){
-
-                    character.sprite.style.backgroundImage = "url('../sprites/Linkieleftdmg.gif')";
-                }
+            
                 if (character.health <= 0) {
                     gameOver.play();
                     alert("GAME OVER");
@@ -282,7 +289,10 @@ if (!collisionDetected || !ganonCollision) {
         case "g":
             character.attacking = true;
             character.linkAttacksEnemies(enemyArray);
-            if(ganon) character.linkAttacksGanon(ganon);
+            if (ganon) {
+                character.linkAttacksGanon(ganon)}; 
+                sword.style.display = "inline-block"
+                
             break;
     }
 
@@ -293,7 +303,30 @@ if (!collisionDetected || !ganonCollision) {
 
 
 window.addEventListener("keyup", function (e) {
-    
+     sword.style.display = "none"
+    for (let i = 0; i < enemyArray.length; i++) {
+        let linkX = character.x;
+        let linkXRight = character.x + character.width;
+        let linkY = character.y;
+        let linkYBottom = character.y + character.height;
+
+        let enemyXRight = enemyArray[i].x + enemyArray[i].width;
+        let enemyYBottom = enemyArray[i].y + enemyArray[i].height;
+
+        if (enemyArray[i].x < linkXRight + 2 && enemyXRight > linkX - 2 &&
+            enemyArray[i].y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
+                
+            if (character.directionX === 1 || (character.directionX === 1 && character.directionY === 1) ||
+                (character.directionX === 1 && character.directionY === -1) || character.directionX === 0 ||
+                character.directionY === 0) {
+                character.sprite.style.backgroundImage = "url('../sprites/Linkierightdmg.gif')";
+            } else if (character.directionX === -1 || (character.directionX === -1 && character.directionY === -1) ||
+                (character.directionX === -1 && character.directionY === 1) || character.directionX === 0 ||
+                character.directionY === 0) {
+                character.sprite.style.backgroundImage = "url('../sprites/Linkieleftdmg.gif')";
+            }
+        }
+    }
     switch (e.key) {
         case "a":
         case "d":
