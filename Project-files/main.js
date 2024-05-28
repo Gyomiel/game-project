@@ -227,10 +227,10 @@ window.addEventListener("keydown", function (e) {
                 character.health -= enemyArray[i].strength;
                 character.removeHearts()
                 if(character.directionX === 1) {
-                    character.sprite.style.backgroundImage = "url('../sprites/linkierightdmg.gif')";
+                    character.sprite.style.backgroundImage = "url('../sprites/Linkierightdmg.gif')";
                 } else if (character.directionX === -1){
 
-                    character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
+                    character.sprite.style.backgroundImage = "url('../sprites/Linkieleftdmg.gif')";
                 }
                 if (character.health <= 0) {
                     gameOver.play();
@@ -258,7 +258,7 @@ if (!collisionDetected || !ganonCollision) {
             character.directionX = -1;
             character.speed = 10;
             character.characterMovementX();
-            character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
+            character.sprite.style.backgroundImage = "url('../sprites/Linkieleft.gif')";
           
             break;
         case "d":
@@ -266,7 +266,7 @@ if (!collisionDetected || !ganonCollision) {
             character.directionX = 1;
             character.speed = 10;
             character.characterMovementX();
-            character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
+            character.sprite.style.backgroundImage = "url('../sprites/Linkieright.gif')";
             break;
         case "w":
             accessBattle();
