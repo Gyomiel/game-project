@@ -249,8 +249,6 @@ window.addEventListener("keydown", function (e) {
 }
 
 character.collisionWithGanon();
-let linkieLeft =  "url('../sprites/Linkieleft.gif')"
-let linkeRight = "url('../sprites/Linkieright.gif')"
 if (!collisionDetected || !ganonCollision) {
     switch (e.key) {
         case "a":
@@ -259,7 +257,7 @@ if (!collisionDetected || !ganonCollision) {
             character.speed = 10;
             character.characterMovementX();
             
-            character.sprite.style.backgroundImage = linkieLeft;
+            character.sprite.style.backgroundImage = "url('../sprites/Linkieleft.gif')";
           
             break;
         case "d":
@@ -267,7 +265,7 @@ if (!collisionDetected || !ganonCollision) {
             character.directionX = 1;
             character.speed = 10;
             character.characterMovementX();
-            character.sprite.style.backgroundImage = linkeRight;
+            character.sprite.style.backgroundImage = "url('../sprites/Linkieright.gif')";
             break;
         case "w":
             accessBattle();
