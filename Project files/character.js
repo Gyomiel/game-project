@@ -41,6 +41,7 @@ class Character { // Creates the character.
                 if (this.x < enemyXRight + 20 && characterXRight > enemyX - 20 &&
                     this.y < enemyYBottom + 20 && characterYBottom > enemyY - 20) {
                         enemy.health -= this.strenght;
+                        enemyOuch.play();
                         if(enemy.health <= 0) {
                             enemy.removeEnemy();
                         }
@@ -53,10 +54,9 @@ class Character { // Creates the character.
         linkAttacksGanon(boss) {
             if(this.final){
                 this.attacking = true;
-                console.log(boss.health)
     
                 boss.health = boss.health - this.strenght;
-                console.log(boss.health)
+                ganonOuch.play();
                 if(boss.health <= 0) {
                     boss.removeGanon();
                     let youWon = document.getElementById("youWon");
@@ -291,27 +291,26 @@ collisionWithGanon() {
     
        if (this.x < ganonXRight  && characterXRight  > ganonX &&
            this.y  < ganonYBottom && characterYBottom  > ganonY) {
-
+            linkOuch.volume = 1;
+            linkOuch.play();
+            if (character.attacking = true) { ganonOuch.volume = 1; ganonOuch.play() };
             this.health -= ganon.strenght;
             this.removeHearts()
             if(this.health <= 0) {
                 this.removeLink()
             }
-               console.log("HAY COLISIÓN")
+
            if (characterXRight > ganonX && this.x <= ganonX) {
                this.x = ganonX - this.width;
-               console.log("a")
+               
            } else if (this.x < ganonXRight && characterXRight >= ganonXRight) {
                this.x = ganonXRight;
-               console.log("b")
            }
     
            if (characterYBottom > ganonY && this.y <= ganonY) {
                this.y = ganonY - this.height;
-               console.log("c")
            } else if (this.y < ganonYBottom && characterYBottom >= ganonYBottom) {
                this.y = ganonYBottom;
-               console.log("d")
            }
     
           this.speed = 0;
