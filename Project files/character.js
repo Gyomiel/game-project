@@ -59,6 +59,11 @@ class Character { // Creates the character.
                 console.log(boss.health)
                 if(boss.health <= 0) {
                     boss.removeGanon();
+                    alert("YOU WIN!");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+
                 }
             }
 
@@ -66,7 +71,13 @@ class Character { // Creates the character.
         }
 
      removeLink() {
-        alert("ded");
+        alert("GAME OVER");
+        setTimeout(() => {
+            startScreen.style.display = "block";
+            startButton.style.display = "inline-block"
+            canvas.style.display = "none"
+           
+        }, 1000);;
     }
 
 

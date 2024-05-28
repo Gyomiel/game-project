@@ -17,6 +17,7 @@ let timerMoveCharacterY; // Moving time interval on Y axis.
 let timerCreateEnemy;
 let healthBar = document.getElementById("healthbar");
 healthBar.style.display = "none";
+let heart = document.getElementsByClassName("heart")[0];
 
 let enemyArray = [];
 
@@ -172,8 +173,6 @@ backtostartfromcredits.addEventListener("click", () => {
     startButton.style.display = "inline-block";
     creditsButton.style.display = "inline-block";
     backtostartfromcredits.style.display = "none";
-    
-   
 });
 
 // Title screen "Start" button
@@ -225,9 +224,14 @@ window.addEventListener("keydown", function (e) {
 
                     character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
                 }
-            if (character.health <= 0) {
-                character.removeLink();
-            }
+                if (character.health <= 0) {
+                    alert("GAME OVER");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                }
+            
+           
              if (character.checkCollisionsWithEnemies(enemyArray)) {
             collisionDetected = true;
             break;
