@@ -1,5 +1,4 @@
  // Necessary variables
-
 let canvas = document.getElementById("screen"); // Makes the id="screen" into a variable named canvas.
 canvas.style.width = 1000 + "px";
 canvas.style.height = 1000 + "px";
@@ -227,10 +226,10 @@ window.addEventListener("keydown", function (e) {
                 character.health -= enemyArray[i].strength;
                 character.removeHearts()
                 if(character.directionX === 1) {
-                    character.sprite.style.backgroundImage = "url('../sprites/linkierightdmg.gif')";
+                    character.sprite.style.backgroundImage = "url('../sprites/Linkierightdmg.gif')";
                 } else if (character.directionX === -1){
 
-                    character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
+                    character.sprite.style.backgroundImage = "url('../sprites/Linkieleftdmg.gif')";
                 }
                 if (character.health <= 0) {
                     gameOver.play();
@@ -250,7 +249,6 @@ window.addEventListener("keydown", function (e) {
 }
 
 character.collisionWithGanon();
-
 if (!collisionDetected || !ganonCollision) {
     switch (e.key) {
         case "a":
@@ -258,7 +256,8 @@ if (!collisionDetected || !ganonCollision) {
             character.directionX = -1;
             character.speed = 10;
             character.characterMovementX();
-            character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
+            
+            character.sprite.style.backgroundImage = "url('../sprites/Linkieleft.gif')";
           
             break;
         case "d":
@@ -266,7 +265,7 @@ if (!collisionDetected || !ganonCollision) {
             character.directionX = 1;
             character.speed = 10;
             character.characterMovementX();
-            character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
+            character.sprite.style.backgroundImage = "url('../sprites/Linkieright.gif')";
             break;
         case "w":
             accessBattle();
@@ -283,7 +282,7 @@ if (!collisionDetected || !ganonCollision) {
         case "g":
             character.attacking = true;
             character.linkAttacksEnemies(enemyArray);
-            character.linkAttacksGanon(ganon);
+            if(ganon) character.linkAttacksGanon(ganon);
             break;
     }
 
