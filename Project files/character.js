@@ -59,6 +59,8 @@ class Character { // Creates the character.
                 console.log(boss.health)
                 if(boss.health <= 0) {
                     boss.removeGanon();
+                    let youWon = document.getElementById("youWon");
+                    youWon.play();
                     alert("YOU WIN!");
                     setTimeout(() => {
                         //hard reload
@@ -71,6 +73,8 @@ class Character { // Creates the character.
         }
 
      removeLink() {
+        let gameOver = document.getElementById("gameOver");
+        gameOver.play();
         alert("GAME OVER");
         setTimeout(() => {
             //hard reload

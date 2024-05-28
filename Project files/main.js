@@ -181,6 +181,14 @@ backtostartfromcredits.addEventListener("click", () => {
 startScreen.addEventListener("click", () => {
     setInterval(() => { stOST.play(); }, 1); });
 
+canvas.addEventListener("click", () => {
+    stOST.pause();
+    setInterval(() => { bgOST.play(); }, 1); });
+
+battleScreen.addEventListener("click", () => {
+    bgOST.pause();
+    setInterval(() => { ganonOST.play(); }, 1); });
+
 
 startButton.addEventListener("click", () => {
     heyListen.play(); // Plays the "Hey, Listen!" sound effect when the button is clicked.

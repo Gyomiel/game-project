@@ -77,22 +77,76 @@ body {
 }
 
 #creditsScreen {
-  width: 500px;
-  height: 500px;
-  background-color: black;
-  position: absolute;
   display: none;
+  width: 500px;
+  height: 700px;
+  background-color: teal;
+  color: white;
+  position: absolute;
+  border-radius: 40px;
 }
+
+h3 {
+  margin-top: 2rem;
+  margin-left: 162px;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+img {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  padding: 1rem;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+  font-size: 14px;
+}
+
+h4 {
+  margin-left: 137px;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+  color: black;
+}
+
+ol {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  margin-right: 2rem;
+}
+
 .backtostartfromcredits {
   display: none;
   position: absolute;
-  width: 60px;
-  height: 20px;
-  top: 50%;
-  left: 49%;
-  
+  width: 100px;
+  height: 40px;
+  margin-top: 635px;
+  background-color: gray;
+  color: white;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  font-family: 'Press Start 2P', sans-serif;
 }
-
 
 #dead {
   display: none;
@@ -102,6 +156,7 @@ body {
   top: 260px;
   left: 180px;
 }
+
 #ganon {
   background-image: url(../sprites/ganonrosario.gif);
   background-size: contain;
