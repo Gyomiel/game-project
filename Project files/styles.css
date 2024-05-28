@@ -55,7 +55,7 @@ body {
 }
 
 #startScreen {
-    background-image: url(../images/Screenshot\ from\ 2024-05-21\ 10-11-12.png);
+    background-image: url(../images/titlescreen.png);
     width: 1000px;
     height: 1000px;
     background-size: 100%;
@@ -74,9 +74,79 @@ body {
   position: relative;
   display: none;
   transition: opacity 20s ease-in-out;
-  
 }
 
+#creditsScreen {
+  display: none;
+  width: 500px;
+  height: 700px;
+  background-color: teal;
+  color: white;
+  position: absolute;
+  border-radius: 40px;
+}
+
+h3 {
+  margin-top: 2rem;
+  margin-left: 162px;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+img {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  padding: 1rem;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+  font-size: 14px;
+}
+
+h4 {
+  margin-left: 137px;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+  color: black;
+}
+
+ol {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  margin-right: 2rem;
+}
+
+.backtostartfromcredits {
+  display: none;
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  margin-top: 635px;
+  background-color: gray;
+  color: white;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  font-family: 'Press Start 2P', sans-serif;
+}
 
 #dead {
   display: none;
@@ -93,6 +163,29 @@ body {
   background-repeat: no-repeat;
   background-color: transparent;
   position: absolute;
+  border-radius: 50%;
+  animation: explode 4s infinite, sparks 2s infinite; /* Cambié la duración a 2s y establecí la repetición infinita */
+}
+
+@keyframes explode {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+
+@keyframes sparks {
+  0% {
+    box-shadow: 0 0 10px #FFF, 0 0 20px #FFF, 0 0 30px #FFF, 0 0 40px #FFF, 0 0 50px #FFF, 0 0 60px #FFF, 0 0 70px #FFF, 0 0 80px #FFF, 0 0 90px #FFF, 0 0 100px #FFF, 0 0 110px #FFF;
+  }
+  100% {
+    box-shadow: 0 0 10px #FFF, 0 0 20px #FFF, 0 0 30px #FFF, 0 0 40px #FFF, 0 0 50px #FFF, 0 0 60px #FFF, 0 0 70px #FFF, 0 0 80px #FFF, 0 0 90px #FFF, 0 0 100px #FFF, 0 0 110px transparent;
+  }
 }
 
 
@@ -101,8 +194,7 @@ body {
 } 
 
 
-
-button {
+.startbtn {
     background-color: #ff5c2b;
     color: white;
     font-weight: bold;
@@ -117,6 +209,23 @@ button {
     border-radius: 40px;
     font-family: 'Press Start 2P', sans-serif;
     animation: pulse 1s infinite;
+}
+
+.creditsbtn {
+    background-color: grey;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    width: 160px;
+    height: 50px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    margin-top: 915px;
+    margin-left: 750px;
+    border-radius: 40px;
+    font-family: 'Press Start 2P', sans-serif;
 }
 
 
@@ -134,7 +243,7 @@ button {
 
 button:hover {
 transition: padding 0.3s ease-in-out;
-background-color: #4e171f;
+background-color: black;
 cursor: pointer;
 }
 
@@ -166,3 +275,26 @@ audio {
     transform: translateY(0) scale(1);
   }
 }
+
+#enemy.hit {
+  animation: attackAnimation 1s ease forwards infinite; 
+ 
+} 
+
+ @keyframes attackAnimation {
+  0% {
+      transform: scale(1);
+      box-shadow: none; 
+  }
+  50% {
+      transform: scale(0.8);
+      box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.7);
+      border-radius: 50%;
+  }
+  100% {
+      transform: scale(0.8);
+      box-shadow: none;
+      border-radius: 50%;
+  }
+} 
+

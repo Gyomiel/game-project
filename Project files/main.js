@@ -3,18 +3,25 @@
 let canvas = document.getElementById("screen"); // Makes the id="screen" into a variable named canvas.
 canvas.style.width = 1000 + "px";
 canvas.style.height = 1000 + "px";
-let startButton = document.getElementsByClassName("btn")[0]; // Button that starts the game from the title screen.
+let startButton = document.getElementsByClassName("startbtn")[0]; // Button that starts the game from the title screen.
 let startScreen = document.getElementById("startScreen"); // Makes the id="startScreen" into a variable named startScreen.
+let creditsButton = document.getElementsByClassName("creditsbtn")[0];
+let creditsScreen = document.getElementById("creditsScreen");
+let backtostartfromcredits = document.getElementsByClassName("backtostartfromcredits")[0];
 let heyListen = document.getElementById("heyListen"); // "Hey, listen!" sound effect for the button.
-let stOST = document.getElementById("stOST"); // "The Hero of Rhyme" soundtrack for the title screen.
+let bgOST = document.getElementById("bgOST"); 
+let stOST = document.getElementById("stOST"); // "Let's fighting love" soundtrack for the title screen.
+let ganonOST = document.getElementById("ganonOST") // "Dale, Zelda, dale" soundtrack for the battle with Ganon.
 let timerMoveCharacterX; // Moving time interval on X axis.
 let timerMoveCharacterY; // Moving time interval on Y axis.
 let timerCreateEnemy;
 let healthBar = document.getElementById("healthbar");
 healthBar.style.display = "none";
+let heart = document.getElementsByClassName("heart")[0];
 
+let enemyArray = [];
 
-// Create obstacles
+// Creating obstacles
 
 let arrayObstacles = [];
 
@@ -48,9 +55,20 @@ let battleScreen = document.getElementById("battlescreen"); // Makes the id="bat
 battleScreen.style.width = 1000 + "px"; // Setting dimensions
 battleScreen.style.height = 1000 + "px";
  
+let ganon;
+let arrayObstaclesBattleScreen = [];;
 
 function accessBattle() {
+
+    character.final = true
     if (character.x > 333 && character.x < 500 && character.y < 30) {
+        ganon = new Ganon(400, 200);
+        arrayObstacles = []
+        clearInterval(timerCreateEnemy)
+        /* for (let i = 0; i<= enemyArray.length; i++) {
+            enemyArray[i].removeEnemy();
+        } */
+        enemyArray = []
         character.x = 730;
         character.y = 880;
         battleScreen.style.display = "block";
@@ -58,31 +76,50 @@ function accessBattle() {
         character.insertCharacterIntoBattleScreen();
         ganon.insertGanon();
         battleScreen.appendChild(healthBar);
+        
+
+        //obstacles battlescreen
+
+
+        let topWall = new Obstacles(1000, 100, 0, 0);
+        arrayObstaclesBattleScreen.push(topWall)
+        topWall.insertObstaclesGanon()
+
+        let leftWall1 = new Obstacles(150, 500, 0, 0);
+        arrayObstaclesBattleScreen.push(leftWall1)
+        leftWall1.insertObstaclesGanon()
+
+        let leftWall2 = new Obstacles(60, 300, 0, 505);
+        arrayObstaclesBattleScreen.push(leftWall2)
+        leftWall2.insertObstaclesGanon()
+
+        let bottomWall = new Obstacles(650, 300, 0, 700);
+        arrayObstaclesBattleScreen.push(bottomWall);
+        bottomWall.insertObstaclesGanon()
+
+        let rightWall = new Obstacles(200, 1000, 850, 100);
+        arrayObstaclesBattleScreen.push(rightWall);
+        rightWall.insertObstaclesGanon()
+ 
 
     }
-
     }
-
-
-let ganon = new Ganon(400, 200);
-
 
 // Enemies array
-let enemyArray = [];
+let counterEnemies = 0;
 
 function createEnemy() {
-    if (enemyArray.length <= 2) {
+    if (enemyArray.length <= 2 && counterEnemies <= 3) {
         
     let randomLocationY = Math.floor(Math.random() * ((1000 - 75 - 120) - 250 ) + 300);
 
     let randomLocationX = Math.floor(Math.random() * ((1000 - 75 - 120) - 400) + 400)
 
     let enemy = new Enemy(randomLocationX, randomLocationY);
+    counterEnemies++;
 
     enemy.insertEnemy();
-    enemyArray.push(enemy); }
-}
-
+    enemyArray.push(enemy); }};
 
 // Character
 
@@ -114,27 +151,46 @@ function startGame() { // Starts the game.
     obstaclesSecondTreeRow.insertObstacles();
     obstaclesFirstTreeColumn.insertObstacles();
     obstaclesSecondTreeColumn.insertObstacles();
+ 
+};
 
-    /*setTimeout(() => {
-        character.receiveDamage();
-    }, 3000);*/
+/// Credits button
+creditsButton.addEventListener("click", () => {
+    startScreen.style.display = "none";
+    creditsScreen.style.display = "block";
+    startButton.style.display = "none";
+    creditsButton.style.display = "none";
 
-    
-}
+    creditsScreen.style.position = "relative";
 
+    backtostartfromcredits.style.display = "inline-block";
+});
+
+//back to start
+
+backtostartfromcredits.addEventListener("click", () => {
+    startScreen.style.display = "block";
+    creditsScreen.style.display = "none";
+    startButton.style.display = "inline-block";
+    creditsButton.style.display = "inline-block";
+    backtostartfromcredits.style.display = "none";
+});
 
 // Title screen "Start" button
 
 startScreen.addEventListener("click", () => {
-    let bgST = setInterval(() => {
-        stOST.play();
-    }, 10);
+    setInterval(() => { stOST.play(); }, 1); });
 
-})
+canvas.addEventListener("click", () => {
+    stOST.pause();
+    setInterval(() => { bgOST.play(); }, 1); });
+
+battleScreen.addEventListener("click", () => {
+    bgOST.pause();
+    setInterval(() => { ganonOST.play(); }, 1); });
+
 
 startButton.addEventListener("click", () => {
-
-
     heyListen.play(); // Plays the "Hey, Listen!" sound effect when the button is clicked.
 
     canvas.appendChild(healthBar);
@@ -143,9 +199,7 @@ startButton.addEventListener("click", () => {
     startScreen.style.display = "none"; // Shows the title screen.
     startButton.style.display = "none"; // Shows the "Start" button.
     healthBar.style.display = "inline-block";
-    setTimeout(() => {
 
-    }, 2000);
 
     
     startGame(); // Starts the game.
@@ -166,58 +220,78 @@ window.addEventListener("keydown", function (e) {
         let enemyXRight = enemyArray[i].x + enemyArray[i].width;
         let enemyYBottom = enemyArray[i].y + enemyArray[i].height;
 
-        // Reducir la salud del personaje principal solo una vez por enemigo
-        
-
-        // Verificar colisión
-        if (enemyArray[i].x < linkXRight + 20 && enemyXRight > linkX - 20 &&
-            enemyArray[i].y < linkYBottom + 20 && enemyYBottom > linkY - 20) {
+      
+        if (enemyArray[i].x < linkXRight + 2 && enemyXRight > linkX - 2 &&
+            enemyArray[i].y < linkYBottom + 2 && enemyYBottom > linkY - 2) {
+                
+                enemyArray[i].sprite.classList.add('hit');
                 character.health -= enemyArray[i].strength;
-                console.log("Auch")
-            character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
-            if (character.health <= 0) {
-                character.removeLink();
-            }
+                character.removeHearts()
+                if(character.directionX === 1) {
+                    character.sprite.style.backgroundImage = "url('../sprites/linkierightdmg.gif')";
+                } else if (character.directionX === -1){
+
+                    character.sprite.style.backgroundImage = "url('../sprites/linkieleftdmg.gif')";
+                }
+                if (character.health <= 0) {
+                    alert("GAME OVER");
+                    setTimeout(() => {
+                        //hard reload
+                        location.href = location.href.split('?')[0] + '?cacheBuster=' + new Date().getTime();
+                    }, 1000);
+                }
+            
+           
+             if (character.checkCollisionsWithEnemies(enemyArray)) {
             collisionDetected = true;
             break;
         }
-    
-
-    if (!collisionDetected) {
-        switch (e.key) {
-            case "a":
-                accessBattle();
-                character.directionX = -1;
-                character.speed = 10;
-                character.characterMovementX();
-                character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
-                break;
-            case "d":
-                accessBattle();
-                character.directionX = 1;
-                character.speed = 10;
-                character.characterMovementX();
-                character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
-                break;
-            case "w":
-                accessBattle();
-                character.directionY = -1;
-                character.speed = 10;
-                character.characterMovementY();
-                break;
-            case "s":
-                accessBattle();
-                character.directionY = 1;
-                character.speed = 10;
-                character.characterMovementY();
-                break;
-            case "g":
-                character.attacking = true;
-                character.linkAttacksEnemies(enemyArray);
-                break;
         }
+    
+}
+
+character.collisionWithGanon();
+
+if (!collisionDetected || !ganonCollision) {
+    switch (e.key) {
+        case "a":
+            accessBattle();
+            character.directionX = -1;
+            character.speed = 10;
+            character.characterMovementX();
+            character.sprite.style.backgroundImage = "url('../sprites/linkieleft.gif')";
+          
+            break;
+        case "d":
+            accessBattle();
+            character.directionX = 1;
+            character.speed = 10;
+            character.characterMovementX();
+            character.sprite.style.backgroundImage = "url('../sprites/linkieright.gif')";
+            break;
+        case "w":
+            accessBattle();
+            character.directionY = -1;
+            character.speed = 10;
+            character.characterMovementY();
+            break;
+        case "s":
+            accessBattle();
+            character.directionY = 1;
+            character.speed = 10;
+            character.characterMovementY();
+            break;
+        case "g":
+            character.attacking = true;
+            character.linkAttacksEnemies(enemyArray);
+            character.linkAttacksGanon(ganon);
+            break;
     }
-}});
+
+
+}
+     
+});
 
 
 window.addEventListener("keyup", function (e) {

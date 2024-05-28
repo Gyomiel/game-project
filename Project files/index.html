@@ -18,10 +18,35 @@
   </head>
   <body>
     <div id="startScreen"></div>
-    <audio id="stOST" controls><source src="../audio/The Hero of Rhyme.mp3" type="audio/mpeg"></audio>
+    <div id="creditsScreen">
+      <h3>DEVELOPERS</h3>
+      <ul>
+        <img src="/images/portraitluis.png">
+        <li>Luis (luisrodbert)</li>
+        <img src="/images/portraitme.png">
+        <li>Marta (Gyomiel)</li>
+        <img src="/images/portraittati.png">
+        <li>Tatiana (TatianaRG8)</li>
+      </ul>
+      <h4>ACKNOWLEDGMENTS</h4>
+      <ol>
+        <li>Alma (AlmaCRH)</li>
+        <li>Adrián (adrianaadd)</li>
+        <li>Karen (karen-rms)</li>
+      </ol>
+    </div>
+    <audio id="stOST" autoplay><source src="../audio/LetsFightingLove.mp3" type="audio/mpeg"></audio>
     <audio id="heyListen"> <source src="../audio/hey_listen.mp3" type="audio/mpeg"></audio> 
-    <audio id="bgOST"><source src="../audio/THORbg.mp3" type="audio/mpeg"></audio>
-    <button class="btn" type="submit" onclick="">START!</button>
+    <audio id="bgOST"><source src="../audio/ConstruccionesKarud.mp3" type="audio/mpeg"></audio>
+    <audio id="ganonOST"><source src="../audio/DaleZeldaDale.mp3" type="audio/mpeg"></audio>
+    <audio id="gameOver"><source src="../audio/GameOver.mp3" type="audio/mpeg"></audio>
+    <audio id="enemyDamage"><source src="../audio/EnemyDamage.mp3" type="audio/mpeg"></audio>
+    <audio id="ganonDamage"><source src="../audio/GanonDamage.mp3" type="audio/mpeg"></audio>
+    <audio id="linkDamage"><source src="../audio/LinkDamage.mp3" type="audio/mpeg"></audio>
+    <audio id="youWon"><source src="../audio/YouWon.mp3" type="audio/mpeg"></audio>
+    <button class="startbtn" type="submit" onclick="">START!</button>
+    <button class="creditsbtn" type="submit" onclick="">CREDITS</button>
+    <button class="backtostartfromcredits" type="submit" onclick="">BACK</button>
     
     <div id="screen"></div>
     <div id="battlescreen"></div>
@@ -31,14 +56,6 @@
       <div class="heart"></div>
       <div class="heart"></div>
     </div>
-
-   <div id="dead">
-    <video width="320" height="240" id="video">
-      <source src="../video/YOU DIED (HD).mp4" type="video/mp4">
-      <source src="movie.ogg" type="video/ogg">
-
-    </video>
-   </div>
     
     
   </body>

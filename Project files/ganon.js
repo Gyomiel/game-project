@@ -8,7 +8,7 @@ class Ganon {
         this.direction = null;
         this.speed = 5;
         this.health = 150;
-        this.strenght = 60;
+        this.strenght = 1;
         this.attacking = false;
 
     }
@@ -29,7 +29,12 @@ class Ganon {
 
     linkAttacksGanon() {
         this.attacking = true;
-        
+
+    }
+    removeGanon() {
+        if (this.health <= 0) {
+            battleScreen.removeChild(this.sprite);
+        }
     }
 }
 

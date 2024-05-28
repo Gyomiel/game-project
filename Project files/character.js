@@ -14,19 +14,20 @@ class Character { // Creates the character.
         this.strenght = 30;
         this.attacking = false;
         this.jump = false;
+        this.final = false
     }
 
-    /*receiveDamage(dmg) {
-        if (this.health <= 0) {
-            this.removeLink();
-        } else {
-            this.health -= dmg;
-        }
 
-    }*/
+    removeHearts() {
+        let healthBar = document.getElementById("healthbar");
+
+        if (this.health === 60 || this.health === 30) {
+            healthBar.lastElementChild.remove();
+        }
+    }
 
     linkAttacksEnemies(enemies) {
-        this.attacking = true;
+    
         if (this.attacking) {
             for (let enemy of enemies) {
                 let enemyX = enemy.x;
@@ -46,12 +47,40 @@ class Character { // Creates the character.
                     }
         }
     }
+    this.attacking = false;
  }
 
-     removeLink() {
-        alert("ded");
+        linkAttacksGanon(boss) {
+            if(this.final){
+                this.attacking = true;
+                console.log(boss.health)
+    
+                boss.health = boss.health - this.strenght;
+                console.log(boss.health)
+                if(boss.health <= 0) {
+                    boss.removeGanon();
+                    let youWon = document.getElementById("youWon");
+                    youWon.play();
+                    alert("YOU WIN!");
+                    setTimeout(() => {
+                        //hard reload
+                        location.href = location.href.split('?')[0] + '?cacheBuster=' + new Date().getTime();
+                    }, 1000);
+                }
+            }
 
-}
+
+        }
+
+     removeLink() {
+        let gameOver = document.getElementById("gameOver");
+        gameOver.play();
+        alert("GAME OVER");
+        setTimeout(() => {
+            //hard reload
+            location.href = location.href.split('?')[0] + '?cacheBuster=' + new Date().getTime();
+        }, 1000);
+    }
 
 
     insertCharacter() { // Inserts the character into the canvas.
@@ -84,7 +113,7 @@ class Character { // Creates the character.
             this.x = moveX;
         }
 
-        if (this.checkCollisionsWithEnemies(enemyArray) || this.checkCollisionsWithObstacles(arrayObstacles)) {
+        if (this.checkCollisionsWithEnemies(enemyArray) || this.checkCollisionsWithObstacles(arrayObstacles) || this.collisionWithGanon() || this.collisionWithGanon() || this.checkCollisionsWithObstaclesBattleScreen(arrayObstaclesBattleScreen)) {
             this.x = previousX;
         }
 
@@ -98,8 +127,9 @@ class Character { // Creates the character.
         if (moveY <= 1000 - this.height && moveY >= 0) {
             this.y = moveY;
         }
+        
 
-        if (this.checkCollisionsWithEnemies(enemyArray)  || this.checkCollisionsWithObstacles(arrayObstacles)) {
+        if (this.checkCollisionsWithEnemies(enemyArray)  || this.checkCollisionsWithObstacles(arrayObstacles) || this.collisionWithGanon() || this.checkCollisionsWithObstaclesBattleScreen(arrayObstaclesBattleScreen)) {
             this.y = previousY;
         }
 
@@ -208,4 +238,86 @@ jumpFence() {
     }
     
 }
+
+checkCollisionsWithObstaclesBattleScreen(obstacles) {
+    
+    for (let obstacle of obstacles) {
+        let obstacleX = obstacle.x;
+        let obstacleXRight = obstacle.x + obstacle.width;
+        let obstacleY = obstacle.y;
+        let obstacleYBottom = obstacle.y + obstacle.height;
+
+        let characterXRight = this.x + this.width;
+        let characterYBottom = this.y + this.height;
+
+        if (this.x < obstacleXRight && characterXRight > obstacleX &&
+            this.y < obstacleYBottom && characterYBottom > obstacleY) {
+
+
+            if (characterXRight > obstacleX && this.x <= obstacleX) {
+                this.x = obstacleX - this.width;
+            } else if (this.x < obstacleXRight && characterXRight >= obstacleXRight) {
+                this.x = obstacleXRight;
+            }
+
+            if (characterYBottom > obstacleY && this.y <= obstacleY) {
+                this.y = obstacleY - this.height;
+            } else if (this.y < obstacleYBottom && characterYBottom >= obstacleYBottom) {
+                this.y = obstacleYBottom;
+            }
+
+            this.speed = 0;//to prevent overlapping from keydown action
+            return true;
+        }
+    } 
+}
+
+//ganon collision
+
+collisionWithGanon() {
+
+    //ganon attacks
+    
+    if (ganon) {
+    
+        
+       let ganonX = ganon.x;
+       let ganonXRight = ganon.x + ganon.width;
+       let ganonY = ganon.y;
+       let ganonYBottom = ganon.y + ganon.height;
+    
+       let characterXRight = this.x + this.width;
+       let characterYBottom = this.y + this.height;
+    
+       if (this.x < ganonXRight  && characterXRight  > ganonX &&
+           this.y  < ganonYBottom && characterYBottom  > ganonY) {
+
+            this.health -= ganon.strenght;
+            this.removeHearts()
+            if(this.health <= 0) {
+                this.removeLink()
+            }
+               console.log("HAY COLISIÓN")
+           if (characterXRight > ganonX && this.x <= ganonX) {
+               this.x = ganonX - this.width;
+               console.log("a")
+           } else if (this.x < ganonXRight && characterXRight >= ganonXRight) {
+               this.x = ganonXRight;
+               console.log("b")
+           }
+    
+           if (characterYBottom > ganonY && this.y <= ganonY) {
+               this.y = ganonY - this.height;
+               console.log("c")
+           } else if (this.y < ganonYBottom && characterYBottom >= ganonYBottom) {
+               this.y = ganonYBottom;
+               console.log("d")
+           }
+    
+          this.speed = 0;
+          return true;
+       }
+    }
+}
+
 }
