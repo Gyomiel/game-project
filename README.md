@@ -44,9 +44,6 @@ This project was created as part of a bootcamp at Reboot Academy by:
 - Adrian ([@adrianaadd](https://github.com/adrianaadd))
 - Karen ([@karen-rms](https://github.com/karen-rms))
    
-### License
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/LUISRGUEZSOSA/Zelda-game-ideas/blob/main/LICENSE.md) file for details.
-
 
 ---
 
